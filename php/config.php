@@ -11,7 +11,7 @@ define('DB_NAME', 'mylife');
 define('DB_CHARSET', 'utf8');
 
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-if($link === false){
+if(!$link){
 	die("Error, could not connect" . mysqli_connect_error());
 }
 ?>
