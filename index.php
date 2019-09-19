@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,12 +21,18 @@
                     </div>
 
                     <?php
-                        if($_GET['Invalid'] == true)
+                        if(@$_GET['Invalid'] == true)
                         {
                     ?>
                         <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Invalid']?></div>
                     <?php
                      }
+
+                        if(@$_GET['Success'] == true){
+                    ?>
+                        <div class="alert-light text-success text-center py-3"><?php echo $_GET['Success']?></div>
+                    <?php
+                        }
                     ?>
                     
 

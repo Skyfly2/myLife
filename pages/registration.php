@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
                     </div>
 
                     <?php
-                        if($_GET['Invalid'] == true)
+                        if(@$_GET['Invalid'] == true)
                         {
                     ?>
                         <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Invalid']?></div>

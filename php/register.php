@@ -12,18 +12,30 @@
 		//Assuming all fields are filled out
 		else
 		{
-			//Confirm passwords match
+			$username = $_POST['UName'];
 			$password = $_POST['Password'];
 			$confirmpass = $_POST['ConfirmPassword'];
-			
-			if($password!=$confirmpass){
+
+			//Confirm Username does not already exist
+			$q = "SELECT UName FROM users WHERE UName = '$username'";
+			$result1 = mysqli_query($link, $q);
+			if(!$result1){
+				die('Error: ' . mysqli_error($link));
+			}
+			$numusers = mysqli_num_rows($result1);
+
+			if($numusers != 0){
+				header("location:../pages/registration.php?Invalid= Username already taken");
+			}
+			//Confirm passwords match
+			elseif($password!=$confirmpass){
 				header("location:../pages/registration.php?Invalid= Passwords did not match");
 			}
 			else{
 			$firstname = $_POST['firstname'];
 			$lastname = $_POST['lastname'];
 			$email = $_POST['email'];
-			$username = $_POST['UName'];
+			
 			
 			$password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -34,7 +46,7 @@
       			}
       			//Successfully Registered
       			else{
-      				header("location:../index.php");
+      				header("location:../index.php?Success= You have successfully registered!");
       			}
 			}
 		}

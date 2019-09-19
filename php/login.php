@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once('config.php');
+	require('config.php');
 	if(isset($_POST['Login']))
 	{
 		//Make user fills out all fields
