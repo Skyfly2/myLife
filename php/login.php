@@ -22,7 +22,7 @@
 			}
 			$num = mysqli_num_rows($result);
 
-			//Verify that there is only one username
+			//Verify that username is not already taken
 			if($num==1){
 				$query2 = "SELECT firstname, lastname, UName, Password, email FROM users WHERE UName = '$username'";
 				$result2 = mysqli_query($link, $query2);
@@ -46,7 +46,7 @@
 	}
 	else
 	{
-		echo 'Not working now';
+		echo 'There is currently an issue connecting to the myLife servers. Please try again later.';
 	}
 	
 ?>
