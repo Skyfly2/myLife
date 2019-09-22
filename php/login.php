@@ -22,7 +22,7 @@
 			}
 			$num = mysqli_num_rows($result);
 
-			//Verify that username is not already taken
+			//Verify there is only one user
 			if($num==1){
 				$query2 = "SELECT firstname, lastname, UName, Password, email FROM users WHERE UName = '$username'";
 				$result2 = mysqli_query($link, $query2);
@@ -37,6 +37,9 @@
 					$_SESSION['lastname'] = $last;
 					$_SESSION['email'] = $email;
 					header("location:../pages/dashboard.php");
+				}
+				else{
+					header("location:../index.php?Invalid= Please Enter Correct Username or Password");
 				}
 			}
 			else{

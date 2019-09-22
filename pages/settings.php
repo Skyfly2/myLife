@@ -1,0 +1,164 @@
+<?php
+    session_start();
+    require("../php/config.php");
+
+    if(isset($_SESSION['username'])){
+    ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myLife - Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    
+
+
+</head>
+<body style="background-color: #CCC;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="#responsivenav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand mt-auto" style="font-family: 'Manjari', sans-serif; font-size: 42px; color: white;" href="dashboard.php">myLife</a>
+  <div class="collapse navbar-collapse" id="responsivenav">
+    
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="../php/logout.php">Logout</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+
+<div class="container px-5" id="content" style="background-color: white; padding-top: 5%; padding-bottom: 5%;">
+    <div class="row">
+      <div class="col-sm-12" style="padding-bottom: 3%;">
+        <h1 class="ml-5" style="font-size: 50px;">Settings</h1>
+      </div>
+
+      <div class="col-sm-4">
+       <div class="card border-success" style="border-width: 4px; padding-bottom: 62px;">
+          <div class="card-header">
+            <h4>Update Email</h4>
+          </div>
+          <div class="card-body">
+
+          <?php if(@$_GET['SuccessEmail']){ ?>
+            <div class="alert-light text-center text-success"><?php echo $_GET['Success']; ?></div>
+          <?php } ?>
+
+          <?php if(@$_GET['InvalidEmail']){ ?>
+            <div class="alert-light text-center text-danger"><?php echo $_GET['Invalid']; ?></div>
+          <?php } ?>
+            <form action="../php/updateuser.php" method="post">
+              <input type="text" name="newemail" placeholder="New Email" class="form-control mb-4">
+              <button class="btn btn-success" name="updateemail">Update Email</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+       <div class="card border-success" style="border-width: 4px; padding-bottom: 62px;">
+          <div class="card-header">
+            <h4>Change Username</h4>
+          </div>
+          <div class="card-body">
+
+          <?php if(@$_GET['SuccessUser']){ ?>
+            <div class="alert-light text-center text-success"><?php echo $_GET['SuccessUser']; ?></div>
+          <?php } ?>
+
+          <?php if(@$_GET['InvalidUser']){ ?>
+            <div class="alert-light text-center text-danger"><?php echo $_GET['InvalidUser']; ?></div>
+          <?php } ?>
+            <form action="../php/updateuser.php" method="post">
+              <input type="text" name="newusername" placeholder="New Username" class="form-control mb-4">
+              <button class="btn btn-success" name="updateusername">Change Username</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+       <div class="card border-success" style="border-width: 4px;">
+          <div class="card-header">
+            <h4>Change Name</h4>
+          </div>
+          <div class="card-body">
+
+          <?php if(@$_GET['SuccessName']){ ?>
+            <div class="alert-light text-center text-success"><?php echo $_GET['SuccessName']; ?></div>
+          <?php } ?>
+
+          <?php if(@$_GET['InvalidName']){ ?>
+            <div class="alert-light text-center text-danger"><?php echo $_GET['InvalidName']; ?></div>
+          <?php } ?>
+            <form action="../php/updateuser.php" method="post">
+              <input type="text" name="newfirst" placeholder="New Firstname" class="form-control mb-4">
+              <input type="text" name="newlast" placeholder="New Lastname" class="form-control mb-4">
+              <button class="btn btn-success" name="updatename">Change Name</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-sm-4">
+      <div class="card border-danger" style="border-width: 4px;">
+        <div class="card-header">
+          <h4>Change Password</h4>
+      </div>
+      <div class="card-body">
+        <?php if(@$_GET['SuccessPass']){?>
+          <div class="alert-light text-success text-center"><?php echo $_GET['SuccessPass']; ?></div>
+        <?php } ?>
+        <?php if(@$_GET['InvalidPass']){ ?>
+          <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidPass']; ?></div>
+        <?php } ?>
+        <form action="../php/updateuser.php" method="post">
+          <input type="password" name="newpass" placeholder="New Password" class="form-control mb-4">
+          <input type="password" name="confirmnewpass" placeholder="Confirm New Password" class="form-control mb-4">
+          <button class="btn btn-danger" name="changepassword">Change Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+    <footer class="page-footer bg-success" style="height:70px;">
+      
+        <div class="container-fluid text-center">
+        <center>
+          <p class="mt-auto" style="color: white; padding-top: 20px;">Copyright &copy Asher Hamrick 2019</p>
+        </center>
+      </div>
+    
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../bootstrap-4.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<?php
+}
+else{
+  header("location:../index.php?Invalid= You must login to access myLife");
+}
+?>
