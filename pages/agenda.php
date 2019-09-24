@@ -56,21 +56,53 @@
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
                 <h2>Personal Tasks</h2>
+                <?php if(@$_GET['InvalidTask']){ ?>
+                <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidTask']; ?></div>
+               <?php } ?>
+               <?php if(@$_GET['SuccessTask']){ ?>
+              <div class="alert-light text-success text-center"><?php echo $_GET['SuccessTask']; ?></div>
+              <?php } ?>
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;">
-              <?php $query="SELECT task FROM tasks WHERE user='$username'";
+              <?php $query="SELECT taskname, purpose, description, user, public, completion FROM tasks WHERE user='$username'";
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
                     }
                     $numtasks=mysqli_num_rows($result);
                     if($numtasks > 0){
-                      $tasks = mysqli_fetch_array($result);
-                      for($count=0; $count<$numtasks; $count++){
+                      while(list($taskname, $purpose, $description, $user, $public, $date)=mysqli_fetch_array($result)){
                       ?>
-                      <div class="card border-primary mb-5">
-                        <div class="card-body">
-                          <h5><?php echo $tasks[$count] ?></h5>
+                      <div class="card mb-5">
+                        <div class="card-header bg-primary">
+                          <div class="row">
+                            <div class="col-sm-10">
+                          <h5><?php echo $taskname ?></h5>
+                          <?php if($date != ''){?>
+                          <p><?php echo 'Due: ' . $date ?></p>
+                          <?php } ?>
+                           </div>
+                        <div class="col-sm-2">
+                          <form action="../php/deletetask.php" method="post">
+                          <button class="btn btn-success" name="completetask">Complete Task</button>
+                         </form>
+                        </div>
+                           </div>
+                        </div>
+                        <div class="card-body border-primary">
+                          <div class="row">
+                            <div class="col-sm-10">
+                              <?php if($description != ''){?>
+                              <p><?php echo 'Description: ' . $description ?></p>
+                              <?php } ?>
+                              <?php if($purpose != ''){?>
+                              <p><?php echo 'Activity: ' . $purpose ?></p>
+                              <?php } ?>
+                            </div>
+                            <div class="col-sm-2">
+                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edittask">Edit Task</button>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -93,10 +125,11 @@
                   </div>
                   <div class="modal-body">
                     <form action="../php/createtask.php" method="post">
+                      <input type="text" name="taskname" placeholder="Task Name" class="mb-4 form-control">
                       <input type="text" name="description" placeholder="Task Description" class="mb-4 form-control">
                       <input type="text" name="date" placeholder="Date Due" class="mb-4 form-control">
                       <select name="purpose" class="mb-4 form-control">
-                        <option>Select Purpose</option>
+                        <option value="none">Select Purpose</option>
                         <?php $query="SELECT purpose FROM purposes WHERE user='$username'";
                               $result=mysqli_query($link, $query);
                               if(!$result){
