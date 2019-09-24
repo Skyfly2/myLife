@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>myLife - Dashboard</title>
+    <title>myLife - Settings</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
@@ -32,6 +32,9 @@
       <li class="nav-item">
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="mydrive.php">myDrive</a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>
       </li>
@@ -46,7 +49,7 @@
 <div class="container px-5" id="content" style="background-color: white; padding-top: 5%; padding-bottom: 5%;">
     <div class="row">
       <div class="col-sm-12" style="padding-bottom: 3%;">
-        <h1 class="ml-5" style="font-size: 50px;">Settings</h1>
+        <h1 class="ml-3" style="font-size: 50px;">Account Settings</h1>
       </div>
 
       <div class="col-sm-4">
@@ -116,7 +119,7 @@
     </div>
     <div class="row mt-5">
       <div class="col-sm-4">
-      <div class="card border-danger" style="border-width: 4px;">
+      <div class="card border-danger" style="border-width: 4px; padding-bottom: 22px;">
         <div class="card-header">
           <h4>Change Password</h4>
       </div>
@@ -131,6 +134,25 @@
           <input type="password" name="newpass" placeholder="New Password" class="form-control mb-4">
           <input type="password" name="confirmnewpass" placeholder="Confirm New Password" class="form-control mb-4">
           <button class="btn btn-danger" name="changepassword">Change Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+      <div class="card border-danger" style="border-width: 4px;">
+        <div class="card-header">
+          <h4>Delete Account</h4>
+      </div>
+      <div class="card-body">
+          <div class="alert-light text-danger text-center" style="font-size: 12px;">By deleting your account, you will no longer have access to myLife. This action cannot be undone</div>
+        <form action="../php/updateuser.php" method="post">
+          <select name="confirmation" class="mb-4">
+            <option value="confirmdeletion">Confirm Deletion</option>
+            <option value="NoDelete">No</option>
+            <option value="YesDelete">Yes</option>
+          </select>
+          <input type="text" name="deleteuser" placeholder="Enter your username" class="form-control mb-4">
+          <button class="btn btn-danger" name="deleteaccount">Delete Account</button>
         </form>
       </div>
     </div>

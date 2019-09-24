@@ -104,6 +104,24 @@
 			}
 		}
 	}
+
+	//Delete User
+	elseif(null !== 'deleteaccount'){
+		if(empty($_POST['deleteuser']) || $_POST['confirmation'] != 'YesDelete' || $_POST['deleteuser'] != $username){
+			header("location:../pages/settings.php?InvalidDelete= You must fill out all confirmation fields properly");
+		}
+		else{
+			$query = "DELETE FROM users WHERE UName = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			else{
+				session_destroy();
+				header("location:../index.php?Success= You have successfully deleted your account. We are sorry to see you go.");
+			}
+		}
+	}
 	else{
 		echo 'There is currently an issue connecting to the myLife servers. Please try again later.';
 	}

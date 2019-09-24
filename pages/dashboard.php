@@ -33,6 +33,9 @@
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="mydrive.php">myDrive</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>
       </li>
       <li class="nav-item">
@@ -49,7 +52,15 @@
         <h1 class="ml-5">Hello, <?php echo $_SESSION['firstname']; ?></h1>
         </div>
         <div class="col-sm-12">
-        <h3 class="ml-5">Today is <?php $query = "SELECT NOW()"; $result=mysqli_query($link, $query); if(!$result){die('Error: ' . mysqli_error($link));} list($sdate) = mysqli_fetch_array($result); $date=substr($sdate, 5, 6); $year=substr($sdate, 0, 4); echo $date; echo '-'; echo $year;?></h3>
+        <h3 class="ml-5">Today is <?php $query = "SELECT NOW()"; 
+                                  $result=mysqli_query($link, $query); 
+                                  if(!$result){
+                                    die('Error: ' . mysqli_error($link));
+                                  } 
+                                  list($sdate) = mysqli_fetch_array($result); 
+                                  $date=substr($sdate, 5, 6); 
+                                  $year=substr($sdate, 0, 4); 
+                                  echo $date; echo '-'; echo $year;?></h3>
         </div>
         <div class="col-sm-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
