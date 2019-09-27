@@ -119,7 +119,7 @@
     </div>
     <div class="row mt-5">
       <div class="col-sm-4">
-      <div class="card border-danger" style="border-width: 4px; padding-bottom: 22px;">
+      <div class="card border-danger" style="border-width: 4px; padding-bottom: 35px;">
         <div class="card-header">
           <h4>Change Password</h4>
       </div>
@@ -146,7 +146,7 @@
       <div class="card-body">
           <div class="alert-light text-danger text-center" style="font-size: 12px;">By deleting your account, you will no longer have access to myLife. This action cannot be undone</div>
         <form action="../php/updateuser.php" method="post">
-          <select name="confirmation" class="mb-4">
+          <select name="confirmation" class="mb-4 form-control">
             <option value="confirmdeletion">Confirm Deletion</option>
             <option value="NoDelete">No</option>
             <option value="YesDelete">Yes</option>

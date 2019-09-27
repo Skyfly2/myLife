@@ -3,6 +3,7 @@
     require("../php/config.php");
 
     if(isset($_SESSION['username'])){
+      $username = $_SESSION['username'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,10 +50,10 @@
 <div class="container px-5" id="content" style="background-color: white; padding-top: 5%;">
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="ml-5">Hello, <?php echo $_SESSION['firstname']; ?></h1>
+        <h1 style="font-size: 50px;">Hello, <?php echo $_SESSION['firstname']; ?></h1>
         </div>
         <div class="col-sm-12">
-        <h3 class="ml-5">Today is <?php $query = "SELECT NOW()"; 
+        <h3 style="font-size: 30px;">Today is <?php $query = "SELECT NOW()"; 
                                   $result=mysqli_query($link, $query); 
                                   if(!$result){
                                     die('Error: ' . mysqli_error($link));
@@ -62,13 +63,62 @@
                                   $year=substr($sdate, 0, 4); 
                                   echo $date; echo '-'; echo $year;?></h3>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-12 m-auto">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
               </div>
-            <div class="card-body">
-        
+            <div class="card-body" style="border-bottom: 1px solid grey;">
+              <?php $query="SELECT taskname, purpose, description, user, public, completion FROM tasks WHERE user='$username'";
+                    $result = mysqli_query($link, $query);
+                    if(!$result){
+                      die('error: ' . mysqli_error($link));
+                    }
+                    $numtasks=mysqli_num_rows($result);
+                    if($numtasks > 0){
+                      $count = 0;
+                      while(list($taskname, $purpose, $description, $user, $public, $date)=mysqli_fetch_array($result)){
+                        if($count < 5){
+                      ?>
+                      <div class="card mb-5">
+                        <div class="card-header bg-success">
+                          <div class="row">
+                            <div class="col-sm-7">
+                          <h5 style="color: white;"><?php echo $taskname; ?></h5>
+                          <?php if($date != ''){?>
+                          <p style="color: white;"><?php echo 'Due: ' . $date; ?></p>
+                          <?php } ?>
+                           </div>
+                        <div class="col-sm-2">
+                          <form action="../php/deletetask.php" method="post">
+                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-primary" >Complete Task</button>
+                         </form>
+                        </div>
+                           </div>
+                        </div>
+                        <div class="card-body border-success">
+                          <div class="row">
+                            <div class="col-sm-7">
+                              <?php if($description != ''){?>
+                              <p><?php echo 'Description: ' . $description ?></p>
+                              <?php } ?>
+                              <?php if($purpose != ''){?>
+                              <p><?php echo 'Activity: ' . $purpose ?></p>
+                              <?php } ?>
+                            </div>
+                            <div class="col-sm-2">
+                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edittask">Edit Task</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <?php $count++;}}
+                    }
+                    else{
+                     ?>
+                    <h4 class="text-danger">You currently have no tasks!</h4>
+                    <?php } ?> 
             </div>
           </div> 
         </div>
