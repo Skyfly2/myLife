@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
-    
 
-
+    <script>if (typeof (fg_widgets) === "undefined") fg_widgets = new Array(); fg_widgets.push("fgid_4ce1c6051896d3eeb7bb3808d");</script>
+            <script async src="https://www.feedgrabbr.com/widget/fgwidget.js"></script>
 </head>
 <body style="background-color: #CCC;">
     <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
@@ -63,13 +63,13 @@
                                   $year=substr($sdate, 0, 4); 
                                   echo $date; echo '-'; echo $year;?></h3>
         </div>
-        <div class="col-sm-12 m-auto">
+        <div class="col-lg-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;">
-              <?php $query="SELECT taskname, purpose, description, user, public, completion FROM tasks WHERE user='$username'";
+              <?php $query="SELECT taskname, purpose, description, user, public, hour, day, year FROM tasks WHERE user='$username'";
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
@@ -77,7 +77,7 @@
                     $numtasks=mysqli_num_rows($result);
                     if($numtasks > 0){
                       $count = 0;
-                      while(list($taskname, $purpose, $description, $user, $public, $date)=mysqli_fetch_array($result)){
+                      while(list($taskname, $purpose, $description, $user, $public, $hour, $day, $year)=mysqli_fetch_array($result)){
                         if($count < 5){
                       ?>
                       <div class="card mb-5">
@@ -89,11 +89,6 @@
                           <p style="color: white;"><?php echo 'Due: ' . $date; ?></p>
                           <?php } ?>
                            </div>
-                        <div class="col-sm-2">
-                          <form action="../php/deletetask.php" method="post">
-                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-primary" >Complete Task</button>
-                         </form>
-                        </div>
                            </div>
                         </div>
                         <div class="card-body border-success">
@@ -105,9 +100,6 @@
                               <?php if($purpose != ''){?>
                               <p><?php echo 'Activity: ' . $purpose ?></p>
                               <?php } ?>
-                            </div>
-                            <div class="col-sm-2">
-                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edittask">Edit Task</button>
                             </div>
                           </div>
                         </div>
@@ -122,7 +114,7 @@
             </div>
           </div> 
         </div>
-        <div class="col-sm-6">
+        <div class="col-lg-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
@@ -132,6 +124,8 @@
             </div>
           </div> 
         </div>
+      </div>
+      <div class="row">
         <div class="col-sm-12 mb-5">
           <div class="card border-success" style="border-width: 4px;">
             <div class="card-body">
@@ -142,6 +136,19 @@
             </div>
          </div>
         </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card-header">
+            <h2>Current News</h2>
+          </div>
+          <div class="card-body">
+            <div class="feedgrabbr_widget" id="fgid_4ce1c6051896d3eeb7bb3808d"></div>
+            
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
