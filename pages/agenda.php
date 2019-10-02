@@ -9,6 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>myLife - Agenda</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
@@ -26,7 +27,7 @@
   <a class="navbar-brand mt-auto" style="font-family: 'Manjari', sans-serif; font-size: 42px; color: white;" href="dashboard.php">myLife</a>
   <div class="collapse navbar-collapse" id="responsivenav">
     
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 mb-auto">
       <li class="nav-item">
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
       </li>
@@ -64,23 +65,27 @@
               <?php } ?>
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;">
-              <?php $query="SELECT taskname, purpose, description, user, public, completion FROM tasks WHERE user='$username'";
+              <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username'";
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
                     }
                     $numtasks=mysqli_num_rows($result);
                     if($numtasks > 0){
-                      while(list($taskname, $purpose, $description, $user, $public, $date)=mysqli_fetch_array($result)){
+                      while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
                       ?>
                       <div class="card mb-5">
                         <div class="card-header bg-success">
                           <div class="row">
                             <div class="col-sm-7">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
-                          <?php if($date != ''){?>
-                          <p style="color: white;"><?php echo 'Due: ' . $date; ?></p>
-                          <?php } ?>
+                          <?php if($day != 0 && $month != 0 && $year !=0){?>
+                          <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
+                          <?php } 
+                                elseif($day != 0 && $month != 0){?>
+                                  <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+
+                                <?php } ?>
                            </div>
                         <div class="col-sm-2">
                           <form action="../php/deletetask.php" method="post">
@@ -125,9 +130,43 @@
                   </div>
                   <div class="modal-body">
                     <form action="../php/createtask.php" method="post">
-                      <input type="text" name="taskname" placeholder="Task Name" class="mb-4 form-control">
+                      <input type="text" name="taskname" placeholder="Task Name*" class="mb-4 form-control">
                       <input type="text" name="description" placeholder="Task Description" class="mb-4 form-control">
-                      <input type="text" name="date" placeholder="Date Due" class="mb-4 form-control">
+                      <select name="time" class="form-control mb-4">
+                        <option value=0>Hour due</option>
+                        <?php $count=1;
+                              while($count <= 12){
+                                ?> <option value=<?php echo $count?>><?php echo $count?></option>
+                                <?php
+                                $count++;
+                              }
+                        ?>
+                      </select>
+                      <select name="month" class="form-control mb-4">
+                        <option value=0>Select Month</option>
+                        <option value=1>January</option>
+                        <option value=2>February</option>
+                        <option value=3>March</option>
+                        <option value=4>April</option>
+                        <option value=5>May</option>
+                        <option value=6>June</option>
+                        <option value=7>July</option>
+                        <option value=8>August</option>
+                        <option value=9>September</option>
+                        <option value=10>October</option>
+                        <option value=11>November</option>
+                        <option value=12>December</option>
+                      </select>
+                      <select name="day" class="form-control mb-4">
+                        <option value=0>Day Due</option>
+                        <?php $count=1;
+                              while($count <= 31){
+                                ?> <option value=<?php echo $count?>><?php echo $count?></option>
+                                <?php
+                                $count++;
+                              }
+                        ?>
+                      </select>
                       <select name="purpose" class="mb-4 form-control">
                         <option value="none">Select Purpose</option>
                         <?php $query="SELECT purpose FROM purposes WHERE user='$username'";
@@ -175,6 +214,26 @@
             </div>
           </div> 
         </div>
+        <div class="col-sm-6">
+          <div class="card border-success mb-5" style="border-width: 4px;">
+            <div class="card-header">
+                <h2>Share Your Schedule</h2>
+              </div>
+            <div class="card-body">
+              <?php if(@$_GET['InvalidPurpose']){ ?>
+              <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidPurpose']; ?></div>
+              <?php } ?>
+              <?php if(@$_GET['SuccessPurpose']){ ?>
+                <div class="alert-light text-center text-success"><?php echo $_GET['SuccessPurpose']; ?></div>
+              <?php } ?>
+              <form action="../php/createpurpose.php" method="post">
+                <input type="text" placeholder="User" name="shareduser" class="mb-4 form-control">
+                <button class="btn btn-success" name="shareuser">Share Schedule</button>
+              </form>
+            </div>
+          </div> 
+        </div>
+
     </div>
   </div>
 

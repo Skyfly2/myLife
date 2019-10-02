@@ -9,9 +9,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>myLife - Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
 
@@ -63,7 +64,7 @@
                                   $year=substr($sdate, 0, 4); 
                                   echo $date; echo '-'; echo $year;?></h3>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-12">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
@@ -117,7 +118,7 @@
         <div class="col-lg-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
-                <h2>Daily Rundown</h2>
+                <h2>Social Schedule</h2>
               </div>
             <div class="card-body">
         

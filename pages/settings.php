@@ -8,6 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>myLife - Settings</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
@@ -49,7 +50,7 @@
 <div class="container px-5" id="content" style="background-color: white; padding-top: 5%; padding-bottom: 5%;">
     <div class="row">
       <div class="col-sm-12" style="padding-bottom: 3%;">
-        <h1 class="ml-3" style="font-size: 50px;">Account Settings</h1>
+        <h1 style="font-size: 50px;">Account Settings</h1>
       </div>
 
       <div class="col-lg-4" style="padding-bottom: 10%;">
@@ -145,13 +146,17 @@
       </div>
       <div class="card-body">
           <div class="alert-light text-danger text-center" style="font-size: 12px;">By deleting your account, you will no longer have access to myLife. This action cannot be undone</div>
+
+          <?php if(@$_GET['InvalidDelete']){ ?>
+            <div class="alert-light text-center text-danger"><?php echo $_GET['InvalidDelete']; ?></div>
+          <?php } ?>
         <form action="../php/updateuser.php" method="post">
           <select name="confirmation" class="mb-4 form-control">
             <option value="confirmdeletion">Confirm Deletion</option>
             <option value="NoDelete">No</option>
             <option value="YesDelete">Yes</option>
           </select>
-          <input type="text" name="deleteuser" placeholder="Enter your username" class="form-control mb-4">
+          <input type="password" name="deleteuser" placeholder="Enter your password" class="form-control mb-4">
           <button class="btn btn-danger" name="deleteaccount">Delete Account</button>
         </form>
       </div>
