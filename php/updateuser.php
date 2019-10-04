@@ -107,7 +107,15 @@
 
 	//Delete User
 	elseif(null !== 'deleteaccount'){
-		if(empty($_POST['deleteuser']) || $_POST['confirmation'] != 'YesDelete' || $_POST['deleteuser'] != $username){
+		$q = "SELECT Password FROM users WHERE UName = '$username'";
+		$r = mysqli_query($link, $q);
+		if(!$r){
+			die('error: ' . mysqli_error($link));
+		}
+		$pass = $_POST['deleteuser'];
+		list($passhash) = mysqli_fetch_array($r);
+		if($_POST['confirmation'] != 'YesDelete' || !(password_verify($pass, $passhash))){
+			echo '$pass';
 			header("location:../pages/settings.php?InvalidDelete= You must fill out all confirmation fields properly");
 		}
 		else{

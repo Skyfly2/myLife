@@ -12,10 +12,12 @@
 			$taskname = $_POST['taskname'];
 			$description = $_POST['description'];
 			$purpose = $_POST['purpose'];
-			$date = $_POST['date'];
+			$hour = $_POST['time'];
 			$public = $_POST['publicize'];
+			$day = $_POST['day'];
+			$month = $_POST['month'];
 
-			$query = "INSERT INTO tasks (user, purpose, public, taskname, description, completion) VALUES ('$username', '$purpose', '$public', '$taskname', '$description', '$date')";
+			$query = "INSERT INTO tasks (user, purpose, public, taskname, description, hour, day, month) VALUES ('$username', '$purpose', '$public', '$taskname', '$description', '$hour', '$day', '$month')";
 			$result = mysqli_query($link, $query);
 			if(!$result){
 				die('error:'  .mysqli_error($link));

@@ -65,7 +65,7 @@
               <?php } ?>
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;">
-              <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username'";
+              <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username' ORDER BY year, month, day ASC";
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
@@ -85,7 +85,11 @@
                                 elseif($day != 0 && $month != 0){?>
                                   <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
 
-                                <?php } ?>
+                                <?php } 
+                                elseif($day != 0){?>
+                                  <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+
+                              <?php } ?>
                            </div>
                         <div class="col-sm-2">
                           <form action="../php/deletetask.php" method="post">

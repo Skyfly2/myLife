@@ -70,7 +70,7 @@
                 <h2>Daily Rundown</h2>
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;">
-              <?php $query="SELECT taskname, purpose, description, user, public, hour, day, year FROM tasks WHERE user='$username'";
+              <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username' ORDER BY year, month, day ASC";
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
@@ -78,7 +78,7 @@
                     $numtasks=mysqli_num_rows($result);
                     if($numtasks > 0){
                       $count = 0;
-                      while(list($taskname, $purpose, $description, $user, $public, $hour, $day, $year)=mysqli_fetch_array($result)){
+                      while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
                         if($count < 5){
                       ?>
                       <div class="card mb-5">
@@ -86,9 +86,17 @@
                           <div class="row">
                             <div class="col-sm-7">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
-                          <?php if($date != ''){?>
-                          <p style="color: white;"><?php echo 'Due: ' . $date; ?></p>
-                          <?php } ?>
+                          <?php if($day != 0 && $month != 0 && $year !=0){?>
+                          <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
+                          <?php } 
+                                elseif($day != 0 && $month != 0){?>
+                                  <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+
+                                <?php } 
+                                elseif($day != 0){?>
+                                  <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+
+                              <?php } ?>
                            </div>
                            </div>
                         </div>
