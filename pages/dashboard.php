@@ -10,18 +10,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>myLife - Dashboard</title>
-    <link rel="stylesheet" href="../css/styles.css"/>
+    
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <title>myLife - Dashboard</title>
 
     <script>if (typeof (fg_widgets) === "undefined") fg_widgets = new Array(); fg_widgets.push("fgid_4ce1c6051896d3eeb7bb3808d");</script>
             <script async src="https://www.feedgrabbr.com/widget/fgwidget.js"></script>
 </head>
 <body style="background-color: #CCC;">
     <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand mt-auto" style="font-family: 'Manjari', sans-serif; font-size: 42px; color: white;" href="dashboard.php">myLife</a>
@@ -48,7 +50,7 @@
   </div>
 </nav>
 
-<div class="container px-5" id="content" style="background-color: white; padding-top: 5%;">
+<div class="container px-5" id="content" style="background-color: white; padding-top: 5%; ">
     <div class="row">
       <div class="col-sm-12">
         <h1 style="font-size: 50px;">Hello, <?php echo $_SESSION['firstname']; ?></h1>
@@ -60,12 +62,13 @@
                                     die('Error: ' . mysqli_error($link));
                                   } 
                                   list($sdate) = mysqli_fetch_array($result); 
-                                  $date=substr($sdate, 5, 6); 
+                                  $ndate=substr($sdate, 5, 6); 
                                   $year=substr($sdate, 0, 4); 
-                                  echo $date; echo '-'; echo $year;?></h3>
+                                  $date=substr($ndate, 0, 5);
+                                  echo $date . '-' . $year;?></h3>
         </div>
         <div class="col-lg-6 col-sm-12">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card border-success mb-5" style="border-width: 4px; max-height:500px; overflow-y: auto;">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
               </div>

@@ -20,7 +20,7 @@
 </head>
 <body style="background-color: #CCC;">
     <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="#responsivenav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand mt-auto" style="font-family: 'Manjari', sans-serif; font-size: 42px; color: white;" href="dashboard.php">myLife</a>
