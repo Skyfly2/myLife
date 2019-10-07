@@ -202,6 +202,50 @@
             </div>
           </div> 
         </div>
+        <div class="col-sm-12">
+          <div class="card border-success mb-5" style="border-width: 4px;">
+            <div class="card-header">
+              <h2>Shared Schedule Requests</h2>
+            </div>
+            <div class="card-body">
+              <p>These users want to share their public schedule with you!</p>
+              <?php $query = "SELECT mainuser FROM shared_task_hold WHERE holduser = '$username'";
+                    $result = mysqli_query($link, $query);
+                    if(!$result){
+                      die('error: ' . mysqli_error($link));
+                    }
+                    while(list($mainuser) = mysqli_fetch_array($result)){ ?>
+                      <div class="card border-success mb-5">
+                          <div class="card-body">
+                            <div class="row">
+                            <div class="col-sm-8">
+                            <h2><?php $query2 = "SELECT firstname, lastname FROM users WHERE UName = '$mainuser'";
+                                      $result2 = mysqli_query($link, $query2);
+                                      if(!$result2){
+                                        die('error: ' . mysqli_error($link));
+                                      }
+                                      list($sharedfirst, $sharedlast) = mysqli_fetch_array($result2);
+                                      echo $sharedfirst . ' ' . $sharedlast;
+                                ?>
+                            <h6>Username: <?php echo $mainuser; ?></h6>
+                          </div>
+                          <div class="col-sm-2">
+                            <button class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
+                          </div>
+                          <div class="col-sm-2">
+                            <button class="btn btn-danger m-auto" type="submit" value="<?php echo $mainuser; ?>">Deny Request</button>
+                          </div>
+                        </div>
+                          </div>
+                        </div>
+                      <?php} ?>
+              
+              
+            <?php   } ?>
+                    
+            </div>
+          </div>
+        </div>
         <div class="col-sm-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
@@ -233,7 +277,7 @@
               <?php if(@$_GET['SuccessPurpose']){ ?>
                 <div class="alert-light text-center text-success"><?php echo $_GET['SuccessPurpose']; ?></div>
               <?php } ?>
-              <form action="../php/createpurpose.php" method="post">
+              <form action="../php/shareschedule.php" method="post">
                 <input type="text" placeholder="User" name="shareduser" class="mb-4 form-control">
                 <button class="btn btn-success" name="shareuser">Share Schedule</button>
               </form>
