@@ -64,7 +64,7 @@
               <div class="alert-light text-success text-center"><?php echo $_GET['SuccessTask']; ?></div>
               <?php } ?>
               </div>
-            <div class="card-body" style="border-bottom: 1px solid grey;">
+            <div class="card-body" style="border-bottom: 1px solid grey;  max-height: 700px; overflow-y: auto;">
               <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username' ORDER BY year, month, day ASC";
                     $result = mysqli_query($link, $query);
                     if(!$result){
@@ -77,7 +77,7 @@
                       <div class="card mb-5">
                         <div class="card-header bg-success">
                           <div class="row">
-                            <div class="col-sm-7">
+                            <div class="col-sm-10">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
                           <?php if($day != 0 && $month != 0 && $year !=0){?>
                           <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="card-body border-success">
                           <div class="row">
-                            <div class="col-sm-7">
+                            <div class="col-sm-10">
                               <?php if($description != ''){?>
                               <p><?php echo 'Description: ' . $description ?></p>
                               <?php } ?>
@@ -203,7 +203,7 @@
           </div> 
         </div>
         <div class="col-sm-12">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card border-success mb-5" style="border-width: 4px; max-height: 300px; overflow-y: auto;">
             <div class="card-header">
               <h2>Shared Schedule Requests</h2>
             </div>
@@ -230,10 +230,14 @@
                             <h6>Username: <?php echo $mainuser; ?></h6>
                           </div>
                           <div class="col-sm-2">
-                            <button class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
+                            <form method="post" action="../php/acceptuser.php">
+                              <button name="useraccept" class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
+                            </form>
                           </div>
                           <div class="col-sm-2">
-                            <button class="btn btn-danger m-auto" type="submit" value="<?php echo $mainuser; ?>">Deny Request</button>
+                            <form method="post" action="../php/denyuser.php">
+                              <button name="userdeny" class="btn btn-danger m-auto" type="submit" value="<?php echo $mainuser; ?>">Deny Request</button>
+                            </form>
                           </div>
                         </div>
                           </div>
