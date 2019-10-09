@@ -175,7 +175,7 @@
                         ?>
                       </select>
                       <select name="purpose" class="mb-4 form-control">
-                        <option value="none">Select Purpose</option>
+                        <option value="none">Select Activity</option>
                         <?php $query="SELECT purpose FROM purposes WHERE user='$username'";
                               $result=mysqli_query($link, $query);
                               if(!$result){
@@ -202,7 +202,7 @@
             </div>
           </div> 
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
           <div class="card border-success mb-5" style="border-width: 4px; max-height: 300px; overflow-y: auto;">
             <div class="card-header">
               <h2>Shared Schedule Requests</h2>
@@ -253,7 +253,20 @@
         <div class="col-sm-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
-                <h2>Create New Purpose</h2>
+                <h2>Request A Schedule</h2>
+              </div>
+            <div class="card-body">
+              <form action="../php/shareschedule.php" method="post">
+                <input type="text" placeholder="User" name="requesteduser" class="mb-4 form-control">
+                <button class="btn btn-success" name="requestuser">Request Schedule</button>
+              </form>
+            </div>
+          </div> 
+        </div>
+        <div class="col-sm-6">
+          <div class="card border-success mb-5" style="border-width: 4px;">
+            <div class="card-header">
+                <h2>Add New Activity</h2>
               </div>
             <div class="card-body">
               <?php if(@$_GET['InvalidPurpose']){ ?>
@@ -263,7 +276,7 @@
                 <div class="alert-light text-center text-success"><?php echo $_GET['SuccessPurpose']; ?></div>
               <?php } ?>
               <form action="../php/createpurpose.php" method="post">
-                <input type="text" placeholder="Purpose Name" name="purposename" class="mb-4 form-control">
+                <input type="text" placeholder="Activity Name" name="purposename" class="mb-4 form-control">
                 <button class="btn btn-success" name="createpurpose">Create Purpose</button>
               </form>
             </div>
