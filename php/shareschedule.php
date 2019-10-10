@@ -6,6 +6,10 @@
 	//Handle Schedule Requesting
 	if(isset($_POST['requesteduser'])){
 		$requesteduser = $_POST['requesteduser'];
+		if($requesteduser == $username){
+			header("location:../pages/agenda.php?InvalidTask= You cannot request your own schedule");
+		}
+		else{
 		$query = "SELECT user FROM shared_tasks WHERE user = '$requesteduser'";
 		$result = mysqli_query($link, $query);
 		if(!$result){
@@ -46,11 +50,16 @@
 			header("location:../pages/agenda.php?InvalidTask= Schedule Request Invalid");
 		}
 	}
+	}
 
 	//Handle schedule sharing
 	if(isset($_POST['shareduser'])){
 		if(empty($_POST['shareduser'])){
 			header("location:../pages/agenda.php?InvalidTask= Your must enter a user");
+		}
+		$shareduser = $_POST['shareduser'];
+		if($shareduser == $username){
+			header("location:../pages/agenda.php?InvalidTask= You cannot share your schedule with yourself");
 		}
 		else{
 			$exists = false;

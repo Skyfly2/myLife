@@ -202,18 +202,33 @@
             </div>
           </div> 
         </div>
-        <div class="col-sm-6">
+
+        <?php //Determine if there are any requests
+              $query = "SELECT mainuser FROM shared_task_hold WHERE holduser = '$username' AND requestuser = '$username'";
+              $result = mysqli_query($link, $query);
+              if(!$result){
+                die('error: ' . mysqli_error($link));
+              }
+              $q1 = "SELECT mainuser FROM shared_task_hold WHERE holduser = '$username' AND requestuser = mainuser";
+              $r1 = mysqli_query($link, $q1);
+              if(!$r1){
+                die('error: ' . mysqli_error($link));
+              }
+              $numresults1 = mysqli_num_rows($result);
+              $numresults2 = mysqli_num_rows($r1);
+
+              //If there are any requests, display the request inteface
+              if($numresults1 > 0 || $numresults2 > 0){
+        ?>
+        <div class="col-sm-12">
           <div class="card border-success mb-5" style="border-width: 4px; max-height: 300px; overflow-y: auto;">
             <div class="card-header">
               <h2>Shared Schedule Requests</h2>
             </div>
             <div class="card-body">
+              <?php if($numresults1 > 0){ ?>
               <p>These users want to share their public schedule with you!</p>
-              <?php $query = "SELECT mainuser FROM shared_task_hold WHERE holduser = '$username'";
-                    $result = mysqli_query($link, $query);
-                    if(!$result){
-                      die('error: ' . mysqli_error($link));
-                    }
+              <?php 
                     while(list($mainuser) = mysqli_fetch_array($result)){ ?>
                       <div class="card border-success mb-5">
                           <div class="card-body">
@@ -242,13 +257,70 @@
                         </div>
                           </div>
                         </div>
-                      <?php} ?>
+                      <?php} 
+                    ?>
               
               
-            <?php   } ?>
+            <?php   }} ?>
+            <?php if($numresults2 > 0){ ?>
+              <p>These users want you to share their public schedule with them!</p>
+              <?php 
+                    while(list($mainuser) = mysqli_fetch_array($r1)){ ?>
+                      <div class="card border-success mb-5">
+                          <div class="card-body">
+                            <div class="row">
+                            <div class="col-sm-8">
+                            <h2><?php $query2 = "SELECT firstname, lastname FROM users WHERE UName = '$mainuser'";
+                                      $result2 = mysqli_query($link, $query2);
+                                      if(!$result2){
+                                        die('error: ' . mysqli_error($link));
+                                      }
+                                      list($sharedfirst, $sharedlast) = mysqli_fetch_array($result2);
+                                      echo $sharedfirst . ' ' . $sharedlast;
+                                ?>
+                            <h6>Username: <?php echo $mainuser; ?></h6>
+                          </div>
+                          <div class="col-sm-2">
+                            <form method="post" action="../php/acceptuser.php">
+                              <button name="useraccept" class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
+                            </form>
+                          </div>
+                          <div class="col-sm-2">
+                            <form method="post" action="../php/denyuser.php">
+                              <button name="userdeny" class="btn btn-danger m-auto" type="submit" value="<?php echo $mainuser; ?>">Deny Request</button>
+                            </form>
+                          </div>
+                        </div>
+                          </div>
+                        </div>
+                      <?php} 
+                    ?>
+              
+              
+            <?php   }} ?>
                     
             </div>
           </div>
+        </div>
+      <?php } ?>
+        <div class="col-sm-6">
+          <div class="card border-success mb-5" style="border-width: 4px;">
+            <div class="card-header">
+                <h2>Share Your Schedule</h2>
+              </div>
+            <div class="card-body">
+              <?php if(@$_GET['InvalidPurpose']){ ?>
+              <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidPurpose']; ?></div>
+              <?php } ?>
+              <?php if(@$_GET['SuccessPurpose']){ ?>
+                <div class="alert-light text-center text-success"><?php echo $_GET['SuccessPurpose']; ?></div>
+              <?php } ?>
+              <form action="../php/shareschedule.php" method="post">
+                <input type="text" placeholder="User" name="shareduser" class="mb-4 form-control">
+                <button class="btn btn-success" name="shareuser">Share Schedule</button>
+              </form>
+            </div>
+          </div> 
         </div>
         <div class="col-sm-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
@@ -266,6 +338,51 @@
         <div class="col-sm-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
+              <h2>Manage Shedule Sharing</h2>
+            </div>
+            <div class="card-body">
+              <form method="post" action="../php/removefromaccess.php">
+                <label>Remove User From Viewing Your Schedule</label>
+                <select name="removefromaccess" class="form-control">
+                  <option value="none">Select User</option>
+                  <?php 
+                  //Show other users that can view the user's current public tasks
+                  $q = "SELECT shareduser FROM shared_tasks WHERE user = '$username'";
+                  $r = mysqli_query($link, $q);
+                  if(!$r){
+                    die('error: ' . mysqli_error($link));
+                  }
+                  while(list($sharedusers) = mysqli_fetch_array($r)){
+                  ?>
+                  <option value="<?php echo $sharedusers ?>"><?php echo $sharedusers ?></option>
+                <?php } ?>
+                </select>
+                <button type="submit" class="btn btn-success mt-4 mb-4">Remove User</button>
+              </form>
+              <form method="post" action="../php/stopviewinguser.php">
+                <label>Stop Viewing Other User's Schedule</label>
+                <select name="stopviewinguser" class="form-control">
+                  <option value="none">Select User</option>
+                  <?php 
+                  //Show other users that can view the user's current public tasks
+                  $q = "SELECT user FROM shared_tasks WHERE shareduser = '$username'";
+                  $r = mysqli_query($link, $q);
+                  if(!$r){
+                    die('error: ' . mysqli_error($link));
+                  }
+                  while(list($sharedusers) = mysqli_fetch_array($r)){
+                  ?>
+                  <option value="<?php echo $sharedusers ?>"><?php echo $sharedusers ?></option>
+                <?php } ?>
+                </select>
+                <button type="submit" class="btn btn-success mt-4">Stop Viewing</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card border-success mb-5" style="border-width: 4px;">
+            <div class="card-header">
                 <h2>Add New Activity</h2>
               </div>
             <div class="card-body">
@@ -278,25 +395,6 @@
               <form action="../php/createpurpose.php" method="post">
                 <input type="text" placeholder="Activity Name" name="purposename" class="mb-4 form-control">
                 <button class="btn btn-success" name="createpurpose">Create Purpose</button>
-              </form>
-            </div>
-          </div> 
-        </div>
-        <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px;">
-            <div class="card-header">
-                <h2>Share Your Schedule</h2>
-              </div>
-            <div class="card-body">
-              <?php if(@$_GET['InvalidPurpose']){ ?>
-              <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidPurpose']; ?></div>
-              <?php } ?>
-              <?php if(@$_GET['SuccessPurpose']){ ?>
-                <div class="alert-light text-center text-success"><?php echo $_GET['SuccessPurpose']; ?></div>
-              <?php } ?>
-              <form action="../php/shareschedule.php" method="post">
-                <input type="text" placeholder="User" name="shareduser" class="mb-4 form-control">
-                <button class="btn btn-success" name="shareuser">Share Schedule</button>
               </form>
             </div>
           </div> 
