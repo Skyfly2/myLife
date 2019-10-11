@@ -16,7 +16,7 @@
 				die('error:' . mysqli_error($link));
 			}
 
-			header("location:../pages/agenda.php?SuccessPurpose= Purpose successfully created!");
+			header("location:../pages/agenda.php?SuccessPurpose= Activity successfully created!");
 		}
 		
 

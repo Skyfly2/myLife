@@ -54,7 +54,7 @@
       </div>
 
       <div class="col-lg-4" style="padding-bottom: 10%;">
-       <div class="card border-success" style="border-width: 4px; padding-bottom: 62px;">
+       <div class="card border-success" style="border-width: 4px; height: 270px;">
           <div class="card-header">
             <h4>Update Email</h4>
           </div>
@@ -75,7 +75,7 @@
         </div>
       </div>
       <div class="col-lg-4" style="padding-bottom: 10%;">
-       <div class="card border-success" style="border-width: 4px; padding-bottom: 62px;">
+       <div class="card border-success" style="border-width: 4px; height: 270px;">
           <div class="card-header">
             <h4>Change Username</h4>
           </div>
@@ -96,7 +96,7 @@
         </div>
       </div>
       <div class="col-lg-4">
-       <div class="card border-success" style="border-width: 4px;">
+       <div class="card border-success" style="border-width: 4px;  height: 270px;">
           <div class="card-header">
             <h4>Change Name</h4>
           </div>
@@ -120,7 +120,7 @@
     </div>
     <div class="row mt-5">
       <div class="col-lg-4" style="padding-bottom: 10%;">
-      <div class="card border-danger" style="border-width: 4px; padding-bottom: 35px;">
+      <div class="card border-danger" style="border-width: 4px; height: 330px;">
         <div class="card-header">
           <h4>Change Password</h4>
       </div>
@@ -140,7 +140,7 @@
     </div>
   </div>
   <div class="col-lg-4">
-      <div class="card border-danger" style="border-width: 4px;">
+      <div class="card border-danger" style="border-width: 4px; height: 330px; overflow-y: auto;">
         <div class="card-header">
           <h4>Delete Account</h4>
       </div>

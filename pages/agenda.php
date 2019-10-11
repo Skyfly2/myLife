@@ -93,7 +93,7 @@
                            </div>
                         <div class="col-sm-2">
                           <form action="../php/deletetask.php" method="post">
-                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-primary" >Complete Task</button>
+                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-primary" >Complete</button>
                          </form>
 
                         </div>
@@ -225,7 +225,7 @@
             <div class="card-header">
               <h2>Shared Schedule Requests</h2>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-y: auto;">
               <?php if($numresults1 > 0){ ?>
               <p>These users want to share their public schedule with you!</p>
               <?php 
@@ -246,7 +246,7 @@
                           </div>
                           <div class="col-sm-2">
                             <form method="post" action="../php/acceptuser.php">
-                              <button name="useraccept" class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
+                              <button name="useraccept" class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accet Request</button>
                             </form>
                           </div>
                           <div class="col-sm-2">
@@ -263,7 +263,7 @@
               
             <?php   }} ?>
             <?php if($numresults2 > 0){ ?>
-              <p>These users want you to share their public schedule with them!</p>
+              <p>These users want you to share your public schedule with them!</p>
               <?php 
                     while(list($mainuser) = mysqli_fetch_array($r1)){ ?>
                       <div class="card border-success mb-5">
@@ -304,11 +304,11 @@
         </div>
       <?php } ?>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card border-success mb-5" style="border-width: 4px; height: 260px;">
             <div class="card-header">
                 <h2>Share Your Schedule</h2>
               </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-y: auto;">
               <?php if(@$_GET['InvalidPurpose']){ ?>
               <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidPurpose']; ?></div>
               <?php } ?>
@@ -323,11 +323,11 @@
           </div> 
         </div>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card border-success mb-5" style="border-width: 4px; height: 260px;">
             <div class="card-header">
                 <h2>Request A Schedule</h2>
               </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-y: auto;">
               <form action="../php/shareschedule.php" method="post">
                 <input type="text" placeholder="User" name="requesteduser" class="mb-4 form-control">
                 <button class="btn btn-success" name="requestuser">Request Schedule</button>
@@ -336,11 +336,11 @@
           </div> 
         </div>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card border-success mb-5" style="border-width: 4px; height: 420px;">
             <div class="card-header">
               <h2>Manage Shedule Sharing</h2>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-y: auto;">
               <form method="post" action="../php/removefromaccess.php">
                 <label>Remove User From Viewing Your Schedule</label>
                 <select name="removefromaccess" class="form-control">
@@ -381,11 +381,11 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card border-success mb-5" style="border-width: 4px; height: 420px;">
             <div class="card-header">
-                <h2>Add New Activity</h2>
+                <h2>Edit Activities</h2>
               </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-y: auto;">
               <?php if(@$_GET['InvalidPurpose']){ ?>
               <div class="alert-light text-danger text-center"><?php echo $_GET['InvalidPurpose']; ?></div>
               <?php } ?>
@@ -394,7 +394,25 @@
               <?php } ?>
               <form action="../php/createpurpose.php" method="post">
                 <input type="text" placeholder="Activity Name" name="purposename" class="mb-4 form-control">
-                <button class="btn btn-success" name="createpurpose">Create Purpose</button>
+                <button class="btn btn-success mb-4" name="createpurpose">Create Activity</button>
+              </form>
+              <form action="../php/deletepurpose.php" method="post">
+                <label>Select Activity to Delete</label>
+                <select name="deletepurpose" class="form-control mb-4">
+                  <option value="none">Select Activity</option>
+                  <?php //Retrieve Purposes
+                        $query = "SELECT purpose FROM purposes WHERE user = '$username'";
+                        $result = mysqli_query($link, $query);
+                        if(!$result){
+                          die('error: ' . mysqli_error($link));
+                        }
+                        //Loop through purposes
+                        while(list($allpurposes) = mysqli_fetch_array($result)){
+                          ?>
+                          <option value="<?php echo $allpurposes; ?>"><?php echo $allpurposes;?></option>
+                        <?php } ?>
+                </select>
+                <button class="btn btn-success" type="submit">Delete Activity</button>
               </form>
             </div>
           </div> 

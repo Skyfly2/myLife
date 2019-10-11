@@ -87,7 +87,7 @@
                       <div class="card mb-5">
                         <div class="card-header bg-success">
                           <div class="row">
-                            <div class="col-sm-7">
+                            <div class="col-sm-12">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
                           <?php if($day != 0 && $month != 0 && $year !=0){?>
                           <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
@@ -139,6 +139,7 @@
                 die('error: ' . mysqli_error($link));
               }
               $sharedtasks = false;
+              //For all users sharing their schedule, display their public tasks
               while(list($masterusers) = mysqli_fetch_array($result1)){
                 $sharedtasks = true;
                 $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$masterusers' AND public = 'yes' ORDER BY year, month, day ASC";
@@ -147,6 +148,7 @@
                   die('error: ' . mysqli_error($link));
                 }
                 $numtasks=mysqli_num_rows($result);
+                //If that particular user has tasks shared, show them
                 if($numtasks > 0){
                   $count = 0;
                   while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
