@@ -3,16 +3,15 @@ h1,h2,h3,h4,h5,h6{
 }
 
 a{
-  font-size: 25px; font-family: 'Manjari', sans-serif;
+  font-size: 10px; font-family: 'Manjari', sans-serif;
 }
 footer{
   position: relative;
 }
 
-body{
-  background-color: #CCC;
+.btn-mylife{
+	background-color: #3c6948;
 }
-
-.scroll{
-  
+.btn-mylife:hover{
+	background-color: #272e2a;
 }
