@@ -4,6 +4,12 @@
 
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
+      $viewusers = 'all';
+      echo $viewusers;
+      if(isset($_POST['sortbyuser'])){
+        $viewusers = $_POST['sortbyuser'];
+        echo $viewusers;
+      }
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +62,9 @@
         <h1 style="font-size: 50px;">Hello, <?php echo $_SESSION['firstname']; ?></h1>
         </div>
         <div class="col-sm-12">
-        <h3 style="font-size: 30px;">Today is <?php $query = "SELECT NOW()"; 
+        <h3 style="font-size: 30px;">Today is 
+                                  <?php //Display Current Date
+                                  $query = "SELECT NOW()"; 
                                   $result=mysqli_query($link, $query); 
                                   if(!$result){
                                     die('Error: ' . mysqli_error($link));
@@ -129,10 +137,113 @@
         <div class="col-lg-6">
           <div class="card border-success mb-5" style="border-width: 4px;">
             <div class="card-header">
+              <div class="row">
+                <div class="col-sm-6">
                 <h2>Social Schedule</h2>
+                </div>
+                <div class="col-sm-4">
+                <form method="post">
+                  <select class="form-control" name="sortbyuser" style="max-width: 150px;">
+                    <option value="all">Select User</option>
+                    <?php 
+                          //Allow user to toggle between other users
+                          $query = "SELECT user FROM shared_tasks WHERE shareduser = '$username'";
+                          $result = mysqli_query($link, $query);
+                          if(!$result){
+                            die('error: ' . mysqli_error($link));
+                          }
+
+                          while(list($otheruser) = mysqli_fetch_array($result)){
+                          ?>
+                          <option value="<?php echo $otheruser ?>"><?php echo $otheruser ?></option>
+                        <?php } ?>
+                  </select>
+                  <button class="btn btn-success" type="submit">View User</button>
+                </form>
               </div>
-            <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+              </div>
+            </div>
+            <div class="card-body" style="max-height: 455px; overflow-y: auto;">
               <?php 
+              if($viewusers != 'all'){
+                $query = "SELECT user FROM shared_tasks WHERE user = '$viewusers' AND shareduser = '$username'";
+                $result = mysqli_query($link, $query);
+                if(!$result){
+                  die('error1: ' . mysqli_error($link));
+                }
+                if(mysqli_num_rows($result) > 0){
+                  $queryx = "SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$viewusers' AND public = 'yes' ORDER BY year, month, day ASC";
+                  $resultx = mysqli_query($link, $query);
+                  if(!$resultx){
+                    die('error2: ' . mysqli_error($link));
+                  }
+                  $sharedtasks = false;
+              //Display tasks for that particular user
+                while(list($masterusers) = mysqli_fetch_array($result)){
+                  $sharedtasks = true;
+                  $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$masterusers' AND public = 'yes' ORDER BY year, month, day ASC";
+                  $result = mysqli_query($link, $query);
+                  if(!$result){
+                    die('error3: ' . mysqli_error($link));
+                  }
+                  $numtasks=mysqli_num_rows($result);
+                  //If the tasks exist, display them
+                  if($numtasks > 0){
+                    $count = 0;
+                    while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
+                        ?>
+                        <div class="card mb-5">
+                          <div class="card-header bg-success">
+                            <div class="row">
+                              <div class="col-sm-7">
+                            <h5 style="color: white;"><?php echo $taskname; ?></h5>
+                            <?php 
+                                $query2 = "SELECT firstname, lastname FROM users WHERE UName = '$masterusers'";
+                                $result2 = mysqli_query($link, $query2);
+                                if(!$result){
+                                  die('error: ' . mysqli_error($link));
+                                }
+                                list($masterfirst, $masterlast) = mysqli_fetch_array($result2);
+                                ?>
+
+                                <p style="color: white;">User: <?php echo $masterfirst . ' ' . $masterlast; ?> </p>
+
+                            <?php if($day != 0 && $month != 0 && $year !=0){?>
+                            <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
+                            <?php } 
+                                  elseif($day != 0 && $month != 0){?>
+                                    <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+
+                                  <?php } 
+                                  elseif($day != 0){?>
+                                    <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+
+                                <?php } ?>
+                             </div>
+                             </div>
+                          </div>
+                          <div class="card-body border-success">
+                            <div class="row">
+                              <div class="col-sm-7">
+                                <?php
+                                if($description != ''){?>
+                                  <p><?php echo 'Description: ' . $description ?></p>
+                                <?php } ?>
+                                <?php if($purpose != ''){?>
+                                  <p><?php echo 'Activity: ' . $purpose ?></p>
+                                <?php } ?>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      <?php }
+                      }
+                    }
+                }
+
+              }
+              else{
               $query1 = "SELECT user FROM shared_tasks WHERE shareduser = '$username'";
               $result1 = mysqli_query($link, $query1);
               if(!$result1){
@@ -201,6 +312,7 @@
                     <?php }
                     }
                   }
+                }
                   if(!$sharedtasks){
                      ?>
                     <h4 class="text-danger">You currently have no tasks!</h4>
