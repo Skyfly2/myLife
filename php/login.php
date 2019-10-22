@@ -33,9 +33,17 @@
 				$password = $_POST['Password'];
 				if(password_verify($password, $passval)){
 					$_SESSION['username'] = $userval;
+					$user = $_SESSION['username'];
 					$_SESSION['firstname'] = $first;
 					$_SESSION['lastname'] = $last;
 					$_SESSION['email'] = $email;
+					$query3 = "SELECT maincolor FROM user_colors WHERE user = '$user'";
+					$result3 = mysqli_query($link, $query3);
+					if(!$result3){
+						die('error: ' . mysqli_error($link));
+					}
+					list($color) = mysqli_fetch_array($result3);
+					$_SESSION['color'] = $color;
 					header("location:../pages/dashboard.php");
 				}
 				else{

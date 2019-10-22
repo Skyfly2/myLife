@@ -5,10 +5,9 @@
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
       $viewusers = 'all';
-      echo $viewusers;
+      $color = $_SESSION['color'];
       if(isset($_POST['sortbyuser'])){
         $viewusers = $_POST['sortbyuser'];
-        echo $viewusers;
       }
     ?>
 <!DOCTYPE html>
@@ -28,7 +27,7 @@
             <script async src="https://www.feedgrabbr.com/widget/fgwidget.js"></script>
 </head>
 <body style="background-color: #CCC;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="height: 85px; background-color: <?php echo $color; ?>">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -37,19 +36,19 @@
     
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" style="font-size: 25px;" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
+        <a class="nav-link" style="font-size: 25px;" href="agenda.php">Agenda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="mydrive.php">myDrive</a>
+        <a class="nav-link" style="font-size: 25px;" href="mydrive.php">myDrive</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>
+        <a class="nav-link" style="font-size: 25px;" href="settings.php">Settings</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="../php/logout.php">Logout</a>
+        <a class="nav-link" style="font-size: 25px;" href="../php/logout.php">Logout</a>
       </li>
     </ul>
     
@@ -76,11 +75,11 @@
                                   echo $date . '-' . $year;?></h3>
         </div>
         <div class="col-lg-6 col-sm-12">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card mb-5" style="border-width: 4px; max-height: 580px; border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
               </div>
-            <div class="card-body" style="border-bottom: 1px solid grey;  max-height:500px; overflow-y: auto;">
+            <div class="card-body" style="border-bottom: 1px solid grey; overflow-y: auto;">
               <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username' ORDER BY year, month, day ASC";
                     $result = mysqli_query($link, $query);
                     if(!$result){
@@ -135,7 +134,7 @@
           </div> 
         </div>
         <div class="col-lg-6">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card mb-5" style="border-width: 4px; max-height: 580px; border-color:<?php echo $color; ?>">
             <div class="card-header">
               <div class="row">
                 <div class="col-sm-6">
@@ -158,89 +157,90 @@
                           <option value="<?php echo $otheruser ?>"><?php echo $otheruser ?></option>
                         <?php } ?>
                   </select>
-                  <button class="btn btn-success" type="submit">View User</button>
+                  <button class="btn btn-mylife" type="submit">View User</button>
                 </form>
               </div>
               </div>
             </div>
-            <div class="card-body" style="max-height: 455px; overflow-y: auto;">
+            <div class="card-body" style="overflow-y: auto;">
               <?php 
-              if($viewusers != 'all'){
-                $query = "SELECT user FROM shared_tasks WHERE user = '$viewusers' AND shareduser = '$username'";
-                $result = mysqli_query($link, $query);
-                if(!$result){
-                  die('error1: ' . mysqli_error($link));
-                }
-                if(mysqli_num_rows($result) > 0){
-                  $queryx = "SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$viewusers' AND public = 'yes' ORDER BY year, month, day ASC";
-                  $resultx = mysqli_query($link, $query);
-                  if(!$resultx){
-                    die('error2: ' . mysqli_error($link));
-                  }
-                  $sharedtasks = false;
-              //Display tasks for that particular user
-                while(list($masterusers) = mysqli_fetch_array($result)){
-                  $sharedtasks = true;
-                  $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$masterusers' AND public = 'yes' ORDER BY year, month, day ASC";
+                //Show buy user
+                if($viewusers != 'all'){
+                  $query = "SELECT user FROM shared_tasks WHERE user = '$viewusers' AND shareduser = '$username'";
                   $result = mysqli_query($link, $query);
                   if(!$result){
-                    die('error3: ' . mysqli_error($link));
+                    die('error1: ' . mysqli_error($link));
                   }
-                  $numtasks=mysqli_num_rows($result);
-                  //If the tasks exist, display them
-                  if($numtasks > 0){
-                    $count = 0;
-                    while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
-                        ?>
-                        <div class="card mb-5">
-                          <div class="card-header bg-success">
-                            <div class="row">
-                              <div class="col-sm-7">
-                            <h5 style="color: white;"><?php echo $taskname; ?></h5>
-                            <?php 
-                                $query2 = "SELECT firstname, lastname FROM users WHERE UName = '$masterusers'";
-                                $result2 = mysqli_query($link, $query2);
-                                if(!$result){
-                                  die('error: ' . mysqli_error($link));
-                                }
-                                list($masterfirst, $masterlast) = mysqli_fetch_array($result2);
-                                ?>
+                  if(mysqli_num_rows($result) > 0){
+                    $queryx = "SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$viewusers' AND public = 'yes' ORDER BY year, month, day ASC";
+                    $resultx = mysqli_query($link, $query);
+                    if(!$resultx){
+                      die('error2: ' . mysqli_error($link));
+                    }
+                    $sharedtasks = false;
+                //Display tasks for that particular user
+                  while(list($masterusers) = mysqli_fetch_array($result)){
+                    $sharedtasks = true;
+                    $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$masterusers' AND public = 'yes' ORDER BY year, month, day ASC";
+                    $result = mysqli_query($link, $query);
+                    if(!$result){
+                      die('error3: ' . mysqli_error($link));
+                    }
+                    $numtasks=mysqli_num_rows($result);
+                    //If the tasks exist, display them
+                    if($numtasks > 0){
+                      $count = 0;
+                      while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
+                          ?>
+                          <div class="card mb-5">
+                            <div class="card-header bg-success">
+                              <div class="row">
+                                <div class="col-sm-7">
+                              <h5 style="color: white;"><?php echo $taskname; ?></h5>
+                              <?php 
+                                  $query2 = "SELECT firstname, lastname FROM users WHERE UName = '$masterusers'";
+                                  $result2 = mysqli_query($link, $query2);
+                                  if(!$result){
+                                    die('error: ' . mysqli_error($link));
+                                  }
+                                  list($masterfirst, $masterlast) = mysqli_fetch_array($result2);
+                                  ?>
 
-                                <p style="color: white;">User: <?php echo $masterfirst . ' ' . $masterlast; ?> </p>
+                                  <p style="color: white;">User: <?php echo $masterfirst . ' ' . $masterlast; ?> </p>
 
-                            <?php if($day != 0 && $month != 0 && $year !=0){?>
-                            <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
-                            <?php } 
-                                  elseif($day != 0 && $month != 0){?>
-                                    <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+                              <?php if($day != 0 && $month != 0 && $year !=0){?>
+                              <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
+                              <?php } 
+                                    elseif($day != 0 && $month != 0){?>
+                                      <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
 
-                                  <?php } 
-                                  elseif($day != 0){?>
-                                    <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
+                                    <?php } 
+                                    elseif($day != 0){?>
+                                      <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day; ?></p>
 
-                                <?php } ?>
-                             </div>
-                             </div>
-                          </div>
-                          <div class="card-body border-success">
-                            <div class="row">
-                              <div class="col-sm-7">
-                                <?php
-                                if($description != ''){?>
-                                  <p><?php echo 'Description: ' . $description ?></p>
-                                <?php } ?>
-                                <?php if($purpose != ''){?>
-                                  <p><?php echo 'Activity: ' . $purpose ?></p>
-                                <?php } ?>
+                                  <?php } ?>
+                               </div>
+                               </div>
+                            </div>
+                            <div class="card-body border-success">
+                              <div class="row">
+                                <div class="col-sm-7">
+                                  <?php
+                                  if($description != ''){?>
+                                    <p><?php echo 'Description: ' . $description ?></p>
+                                  <?php } ?>
+                                  <?php if($purpose != ''){?>
+                                    <p><?php echo 'Activity: ' . $purpose ?></p>
+                                  <?php } ?>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
-                      <?php }
+                        <?php }
+                        }
                       }
-                    }
-                }
+                  }
 
               }
               else{
@@ -323,7 +323,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12 mb-5">
-          <div class="card border-success" style="border-width: 4px;">
+          <div class="card" style="border-width: 4px; border-color: <?php echo $color; ?>">
             <div class="card-body">
           <a class="weatherwidget-io" href="https://forecast7.com/en/40d71n74d01/new-york/?unit=us" data-label_1="NEW YORK" data-label_2="WEATHER" data-theme="pure" >NEW YORK WEATHER</a>
           <script>
@@ -335,7 +335,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <div class="card border-success mb-5" style="border-width: 4px;">
+        <div class="card mb-5" style="border-width: 4px; border-color: <?php echo $color; ?>">
           <div class="card-header">
             <h2>Current News</h2>
           </div>
@@ -348,7 +348,7 @@
     </div>
   </div>
 
-    <footer class="page-footer bg-success" style="height:70px;">
+    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

@@ -4,6 +4,7 @@
 
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
+      $color = $_SESSION['color'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +17,11 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
-    <title>myLife - Dashboard</title>
+    <title>myDrive</title>
 
-    <script>if (typeof (fg_widgets) === "undefined") fg_widgets = new Array(); fg_widgets.push("fgid_4ce1c6051896d3eeb7bb3808d");</script>
-            <script async src="https://www.feedgrabbr.com/widget/fgwidget.js"></script>
 </head>
 <body style="background-color: #CCC;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="height: 85px; background-color: <?php echo $color; ?>">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -50,11 +49,23 @@
   </div>
 </nav>
 
-<div class="container px-5" id="content" style="background-color: white; padding-top: 5%; ">
-    
-  </div>
+<div class="container px-5" id="content" style="background-color: white; padding-top: 5%;">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>myDrive</h1>
+      <p>A place to store your files for quick and easy access</p>
+    </div>
+    <div class="col-sm-12">
+      <form method="post">
+        <input type="file">
+      </form>
+    </div>
 
-    <footer class="page-footer bg-success" style="height:70px;">
+  </div>
+    
+</div>
+
+    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

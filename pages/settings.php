@@ -3,6 +3,7 @@
     require("../php/config.php");
 
     if(isset($_SESSION['username'])){
+      $color = $_SESSION['color'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@
 
 </head>
 <body style="background-color: #CCC;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="height: 85px; background-color: <?php echo $color; ?>">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -54,7 +55,7 @@
       </div>
 
       <div class="col-lg-4" style="padding-bottom: 10%;">
-       <div class="card border-success" style="border-width: 4px; height: 270px;">
+       <div class="card" style="border-width: 4px; height: 270px; border-color: <?php echo $color; ?>">
           <div class="card-header">
             <h4>Update Email</h4>
           </div>
@@ -75,7 +76,7 @@
         </div>
       </div>
       <div class="col-lg-4" style="padding-bottom: 10%;">
-       <div class="card border-success" style="border-width: 4px; height: 270px;">
+       <div class="card" style="border-width: 4px; height: 270px; border-color: <?php echo $color; ?>">
           <div class="card-header">
             <h4>Change Username</h4>
           </div>
@@ -96,7 +97,7 @@
         </div>
       </div>
       <div class="col-lg-4">
-       <div class="card border-success" style="border-width: 4px;  height: 270px;">
+       <div class="card" style="border-width: 4px;  height: 270px; border-color: <?php echo $color; ?>">
           <div class="card-header">
             <h4>Change Name</h4>
           </div>
@@ -162,10 +163,21 @@
       </div>
     </div>
   </div>
+  <div class="col-lg-4">
+    <div class="card" style="border-color: <?php echo $color; ?>; border-width: 4px; height: 330px;">
+      <div class="card-header"><h2>Edit myLife Colors</h2></div>
+      <div class="card-body">
+        <form method="post" action="../php/editcolors.php">
+          <input type="color" name="newcolor" value="<?php echo $color ?>">
+          <button type="submit" class="btn btn-success">Change Colors</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
   </div>
 
-    <footer class="page-footer bg-success" style="height:70px;">
+    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

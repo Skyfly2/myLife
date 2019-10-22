@@ -4,27 +4,28 @@
 
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
+      $color = $_SESSION['color'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>myLife - Agenda</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <title>myLife - Agenda</title>
     
 
 
 </head>
 <body style="background-color: #CCC;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
+    <nav class="navbar navbar-expand-lg navbar-light ban-mylife" style="height: 85px; background-color: <?php echo $color; ?>">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand mt-auto" style="font-family: 'Manjari', sans-serif; font-size: 42px; color: white;" href="dashboard.php">myLife</a>
+  <a class="navbar-brand mt-auto" style="font-size: 42px; color: white;" href="dashboard.php">myLife</a>
   <div class="collapse navbar-collapse" id="responsivenav">
     
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 mb-auto">
@@ -32,16 +33,16 @@
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
+        <a class="nav-link" style="font-size: 25px;" href="agenda.php">Agenda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="mydrive.php">myDrive</a>
+        <a class="nav-link" style="font-size: 25px;" href="mydrive.php">myDrive</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>
+        <a class="nav-link" style="font-size: 25px;" href="settings.php">Settings</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="../php/logout.php">Logout</a>
+        <a class="nav-link" style="font-size: 25px;" href="../php/logout.php">Logout</a>
       </li>
     </ul>
     
@@ -54,7 +55,7 @@
         <h1 class="ml-3 mb-5" style="font-size: 50px;">Agenda</h1>
       </div>
         <div class="col-sm-12">
-          <div class="card border-success mb-5" style="border-width: 4px;">
+          <div class="card mb-5" style="border-width: 4px; border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Personal Tasks</h2>
                 <?php if(@$_GET['InvalidTask']){ ?>
@@ -93,13 +94,13 @@
                            </div>
                         <div class="col-sm-2">
                           <form action="../php/deletetask.php" method="post">
-                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-primary" >Complete</button>
+                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-mylife" >Complete</button>
                          </form>
 
                         </div>
                            </div>
                         </div>
-                        <div class="card-body border-success">
+                        <div class="card-body">
                           <div class="row">
                             <div class="col-sm-10">
                               <?php if($description != ''){?>
@@ -221,7 +222,7 @@
               if($numresults1 > 0 || $numresults2 > 0){
         ?>
         <div class="col-sm-12">
-          <div class="card border-success mb-5" style="border-width: 4px; max-height: 300px; overflow-y: auto;">
+          <div class="card mb-5" style="border-width: 4px; max-height: 300px; overflow-y: auto; border-color: <?php echo $color; ?>">
             <div class="card-header">
               <h2>Shared Schedule Requests</h2>
             </div>
@@ -230,7 +231,7 @@
               <p>These users want to share their public schedule with you!</p>
               <?php 
                     while(list($mainuser) = mysqli_fetch_array($result)){ ?>
-                      <div class="card border-success mb-5">
+                      <div class="card mb-5" style="border-color: <?php echo $color; ?>">
                           <div class="card-body">
                             <div class="row">
                             <div class="col-sm-8">
@@ -266,7 +267,7 @@
               <p>These users want you to share your public schedule with them!</p>
               <?php 
                     while(list($mainuser) = mysqli_fetch_array($r1)){ ?>
-                      <div class="card border-success mb-5">
+                      <div class="card mb-5" style="border-color: <?php echo $color; ?>">
                           <div class="card-body">
                             <div class="row">
                             <div class="col-sm-8">
@@ -304,7 +305,7 @@
         </div>
       <?php } ?>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px; height: 260px;">
+          <div class="card mb-5" style="border-width: 4px; height: 260px; border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Share Your Schedule</h2>
               </div>
@@ -323,7 +324,7 @@
           </div> 
         </div>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px; height: 260px;">
+          <div class="card mb-5" style="border-width: 4px; height: 260px; border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Request A Schedule</h2>
               </div>
@@ -336,7 +337,7 @@
           </div> 
         </div>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px; height: 420px;">
+          <div class="card mb-5" style="border-width: 4px; height: 420px; border-color: <?php echo $color; ?>">
             <div class="card-header">
               <h2>Manage Shedule Sharing</h2>
             </div>
@@ -381,7 +382,7 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="card border-success mb-5" style="border-width: 4px; height: 420px;">
+          <div class="card mb-5" style="border-width: 4px; height: 420px; border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Edit Activities</h2>
               </div>
@@ -392,6 +393,7 @@
               <?php if(@$_GET['SuccessPurpose']){ ?>
                 <div class="alert-light text-center text-success"><?php echo $_GET['SuccessPurpose']; ?></div>
               <?php } ?>
+              
               <form action="../php/createpurpose.php" method="post">
                 <input type="text" placeholder="Activity Name" name="purposename" class="mb-4 form-control">
                 <button class="btn btn-success mb-4" name="createpurpose">Create Activity</button>
@@ -421,7 +423,7 @@
     </div>
   </div>
 
-    <footer class="page-footer bg-success" style="height:70px;">
+    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

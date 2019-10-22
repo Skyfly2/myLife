@@ -1,17 +1,21 @@
-h1,h2,h3,h4,h5,h6{
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
 a{
-  font-size: 10px; font-family: 'Manjari', sans-serif;
+  font-family: 'Manjari', sans-serif;
 }
 footer{
-  position: relative;
+  position: absolute;
 }
-
 .btn-mylife{
+	background-color: #3c6948;
+}
+.ban-mylife{
 	background-color: #3c6948;
 }
 .btn-mylife:hover{
 	background-color: #272e2a;
+}
+.border-mylife{
+	border-color: #3c6948;
+}
+*{
+	font-family: 'Source Sans Pro', sans-serif;
 }
