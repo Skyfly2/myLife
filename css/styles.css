@@ -5,13 +5,7 @@ footer{
   position: absolute;
   width:100%;
 }
-.btn-mylife{
-	background-color: #3c6948;
-	color:white;
-}
-.btn-mylife:hover{
-	background-color: #6e706c;
-}
+
 .border-mylife{
 	border-color: #3c6948;
 }

@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: <?php echo $buttoncolor;?>;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
     <title>myDrive</title>
 
 </head>
@@ -76,7 +85,6 @@
       </div>
     
     </footer>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../js/jquery-3.3.1.slim.min.js"></script>

@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: <?php echo $buttoncolor;?>;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
     <title>myLife - Agenda</title>
     
 
@@ -96,7 +105,7 @@
                            </div>
                         <div class="col-sm-2">
                           <form action="../php/deletetask.php" method="post">
-                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>">Complete</button>
+                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-mylife">Complete</button>
                          </form>
 
                         </div>
@@ -129,7 +138,7 @@
                     <?php } ?> 
             </div>
             <div class="card-body">
-              <button type="button" class="btn btn-mylife" data-toggle="modal" style="background-color: <?php echo $buttoncolor; ?>"data-target="#addtask">Create Task</button>
+              <button type="button" class="btn btn-mylife" data-toggle="modal" data-target="#addtask">Create Task</button>
             </div>
 
             <div id="addtask" class="modal fade" role="dialog">
@@ -197,7 +206,7 @@
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                       </select>
-                      <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" name="createtask">Create Task</button>
+                      <button class="btn btn-mylife" name="createtask">Create Task</button>
                     </form>
                   </div>
                 </div>
@@ -249,7 +258,7 @@
                           </div>
                           <div class="col-sm-2">
                             <form method="post" action="../php/acceptuser.php">
-                              <button name="useraccept" class="btn btn-mylife m-auto" type="submit" style="background-color: <?php echo $buttoncolor; ?>" value="<?php echo $mainuser; ?>">Accept Request</button>
+                              <button name="useraccept" class="btn btn-mylife m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
                             </form>
                           </div>
                           <div class="col-sm-2">
@@ -285,7 +294,7 @@
                           </div>
                           <div class="col-sm-2">
                             <form method="post" action="../php/acceptuser.php">
-                              <button name="useraccept" class="btn btn-mylife m-auto" type="submit" style="background-color: <?php echo $buttoncolor; ?>" value="<?php echo $mainuser; ?>">Accept Request</button>
+                              <button name="useraccept" class="btn btn-mylife m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
                             </form>
                           </div>
                           <div class="col-sm-2">
@@ -320,7 +329,7 @@
               <?php } ?>
               <form action="../php/shareschedule.php" method="post">
                 <input type="text" placeholder="User" name="shareduser" class="mb-4 form-control">
-                <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" name="shareuser">Share Schedule</button>
+                <button class="btn btn-mylife" name="shareuser">Share Schedule</button>
               </form>
             </div>
           </div> 
@@ -333,7 +342,7 @@
             <div class="card-body" style="overflow-y: auto;">
               <form action="../php/shareschedule.php" method="post">
                 <input type="text" placeholder="User" name="requesteduser" class="mb-4 form-control">
-                <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" name="requestuser">Request Schedule</button>
+                <button class="btn btn-mylife" name="requestuser">Request Schedule</button>
               </form>
             </div>
           </div> 
@@ -360,7 +369,7 @@
                   <option value="<?php echo $sharedusers ?>"><?php echo $sharedusers ?></option>
                 <?php } ?>
                 </select>
-                <button type="submit" style="background-color: <?php echo $buttoncolor; ?>" class="btn btn-mylife mt-4 mb-4">Remove User</button>
+                <button type="submit" class="btn btn-mylife mt-4 mb-4">Remove User</button>
               </form>
               <form method="post" action="../php/stopviewinguser.php">
                 <label>Stop Viewing Other User's Schedule</label>
@@ -378,7 +387,7 @@
                   <option value="<?php echo $sharedusers ?>"><?php echo $sharedusers ?></option>
                 <?php } ?>
                 </select>
-                <button type="submit" style="background-color: <?php echo $buttoncolor; ?>" class="btn btn-mylife mt-4">Stop Viewing</button>
+                <button type="submit" class="btn btn-mylife mt-4">Stop Viewing</button>
               </form>
             </div>
           </div>
@@ -398,7 +407,7 @@
               
               <form action="../php/createpurpose.php" method="post">
                 <input type="text" placeholder="Activity Name" name="purposename" class="mb-4 form-control">
-                <button class="btn btn-mylife mb-4" style="background-color: <?php echo $buttoncolor; ?>" name="createpurpose">Create Activity</button>
+                <button class="btn btn-mylife mb-4" name="createpurpose">Create Activity</button>
               </form>
               <form action="../php/deletepurpose.php" method="post">
                 <label>Select Activity to Delete</label>
@@ -416,7 +425,7 @@
                           <option value="<?php echo $allpurposes; ?>"><?php echo $allpurposes;?></option>
                         <?php } ?>
                 </select>
-                <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" type="submit">Delete Activity</button>
+                <button class="btn btn-mylife" type="submit">Delete Activity</button>
               </form>
             </div>
           </div> 

@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: <?php echo $buttoncolor;?>;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
     
 
 
@@ -72,7 +81,7 @@
           <?php } ?>
             <form action="../php/updateuser.php" method="post">
               <input type="text" name="newemail" placeholder="New Email" class="form-control mb-4">
-              <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor;?>" name="updateemail">Update Email</button>
+              <button class="btn btn-mylife" name="updateemail">Update Email</button>
             </form>
           </div>
         </div>
@@ -93,7 +102,7 @@
           <?php } ?>
             <form action="../php/updateuser.php" method="post">
               <input type="text" name="newusername" placeholder="New Username" class="form-control mb-4">
-              <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor;?>" name="updateusername">Change Username</button>
+              <button class="btn btn-mylife" name="updateusername">Change Username</button>
             </form>
           </div>
         </div>
@@ -115,7 +124,7 @@
             <form action="../php/updateuser.php" method="post">
               <input type="text" name="newfirst" placeholder="New Firstname" class="form-control mb-4">
               <input type="text" name="newlast" placeholder="New Lastname" class="form-control mb-4">
-              <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor;?>" name="updatename">Change Name</button>
+              <button class="btn btn-mylife" name="updatename">Change Name</button>
             </form>
           </div>
         </div>
@@ -182,7 +191,7 @@
           <br/>
           <input type="color" name="newtaskcolor" value="<?php echo $taskcolor ?>">
           <br/>
-          <button type="submit" class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>">Update Colors</button>
+          <button type="submit" class="btn btn-mylife">Update Colors</button>
         </form>
       </div>
     </div>

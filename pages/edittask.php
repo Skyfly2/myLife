@@ -18,6 +18,15 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: <?php echo $buttoncolor;?>;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
     
 
 
@@ -179,7 +188,7 @@
               <option value="no">No</option>
               <option value="yes">Yes</option>
             </select>
-              <button type="submit" value="<?php echo $taskname; ?>" class="btn btn-success" name="updatetask">Update Task</button>
+              <button type="submit" value="<?php echo $taskname; ?>" class="btn btn-mylife" name="updatetask">Update Task</button>
         </form>
       </div>
     </div>

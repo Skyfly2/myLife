@@ -23,6 +23,15 @@
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: <?php echo $buttoncolor;?>;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
     <title>myLife - Dashboard</title>
 
     <script>if (typeof (fg_widgets) === "undefined") fg_widgets = new Array(); fg_widgets.push("fgid_4ce1c6051896d3eeb7bb3808d");</script>
@@ -159,7 +168,7 @@
                           <option value="<?php echo $otheruser ?>"><?php echo $otheruser ?></option>
                         <?php } ?>
                   </select>
-                  <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" type="submit">View User</button>
+                  <button class="btn btn-mylife" type="submit">View User</button>
                 </form>
               </div>
               </div>
