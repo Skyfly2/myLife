@@ -37,13 +37,16 @@
 					$_SESSION['firstname'] = $first;
 					$_SESSION['lastname'] = $last;
 					$_SESSION['email'] = $email;
-					$query3 = "SELECT maincolor FROM user_colors WHERE user = '$user'";
+					$query3 = "SELECT maincolor, buttoncolor, taskcolor FROM user_colors WHERE user = '$user'";
 					$result3 = mysqli_query($link, $query3);
 					if(!$result3){
 						die('error: ' . mysqli_error($link));
 					}
-					list($color) = mysqli_fetch_array($result3);
+					//Set color palat
+					list($color, $buttoncolor, $taskcolor) = mysqli_fetch_array($result3);
 					$_SESSION['color'] = $color;
+					$_SESSION['buttoncolor'] = $buttoncolor;
+					$_SESSION['taskcolor'] = $taskcolor;
 					header("location:../pages/dashboard.php");
 				}
 				else{

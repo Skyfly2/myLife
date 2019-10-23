@@ -4,6 +4,9 @@
 
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
+      $color = $_SESSION['color'];
+      $taskcolor = $_SESSION['taskcolor'];
+      $buttoncolor = $_SESSION['buttoncolor'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +23,7 @@
 
 </head>
 <body style="background-color: #CCC;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="height: 85px;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="height: 85px; background-color: <?php echo $color ?>">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsivenav" aria-controls="responsivenav" aria-expanded="false" aria-label="Toggle navigation" onclick="document.getElementById('content').style.paddingTop = getElementById('content').style.paddingTop === '300px' ? '5%' : '300px'">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -55,7 +58,7 @@
     $result = mysqli_query($link, $query);
     list($taskname, $description, $hour, $month, $day, $purpose, $public) = mysqli_fetch_array($result);?>
     <div class="container px-5" id="content" style="background-color: white; padding-top: 5%; padding-bottom: 5%;">
-      <div class="card border-success" style="border-width: 4px;">  
+      <div class="card" style="border-width: 4px; border-color: <?php echo $color ?>">  
         <div class="card-header">     
           <h2>Edit <?php echo $taskname; ?></h2>
         </div>
@@ -187,7 +190,7 @@
     header("location:../pages/agenda.php");
   }
        ?>                     
-    <footer class="page-footer bg-success" style="height:70px;">
+    <footer class="page-footer" style="height:70px; width:100%; background-color: <?php echo $color ?>">
       
         <div class="container-fluid text-center">
         <center>

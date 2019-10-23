@@ -6,6 +6,8 @@
       $username = $_SESSION['username'];
       $viewusers = 'all';
       $color = $_SESSION['color'];
+      $taskcolor = $_SESSION['taskcolor'];
+      $buttoncolor = $_SESSION['buttoncolor'];
       if(isset($_POST['sortbyuser'])){
         $viewusers = $_POST['sortbyuser'];
       }
@@ -92,7 +94,7 @@
                         if($count < 5){
                       ?>
                       <div class="card mb-5">
-                        <div class="card-header bg-success">
+                        <div class="card-header" style="background-color: <?php echo $taskcolor; ?>">
                           <div class="row">
                             <div class="col-sm-12">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
@@ -157,7 +159,7 @@
                           <option value="<?php echo $otheruser ?>"><?php echo $otheruser ?></option>
                         <?php } ?>
                   </select>
-                  <button class="btn btn-mylife" type="submit">View User</button>
+                  <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" type="submit">View User</button>
                 </form>
               </div>
               </div>
@@ -193,7 +195,7 @@
                       while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
                           ?>
                           <div class="card mb-5">
-                            <div class="card-header bg-success">
+                            <div class="card-header" style="background-color: <?php echo $taskcolor; ?>">
                               <div class="row">
                                 <div class="col-sm-7">
                               <h5 style="color: white;"><?php echo $taskname; ?></h5>
@@ -265,7 +267,7 @@
                   while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
                       ?>
                       <div class="card mb-5">
-                        <div class="card-header bg-success">
+                        <div class="card-header" style="background-color: <?php echo $taskcolor; ?>">
                           <div class="row">
                             <div class="col-sm-7">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
@@ -348,7 +350,7 @@
     </div>
   </div>
 
-    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
+    <footer class="page-footer" style="height:70px; width:100%; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

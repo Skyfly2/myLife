@@ -5,6 +5,8 @@
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
       $color = $_SESSION['color'];
+      $taskcolor = $_SESSION['taskcolor'];
+      $buttoncolor = $_SESSION['buttoncolor'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +78,7 @@
                       while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
                       ?>
                       <div class="card mb-5">
-                        <div class="card-header bg-success">
+                        <div class="card-header" style="background-color: <?php echo $taskcolor; ?>">
                           <div class="row">
                             <div class="col-sm-10">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
@@ -94,7 +96,7 @@
                            </div>
                         <div class="col-sm-2">
                           <form action="../php/deletetask.php" method="post">
-                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-mylife" >Complete</button>
+                            <button id="submit" type="submit" name="taskname" value="<?php echo $taskname ?>" class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>">Complete</button>
                          </form>
 
                         </div>
@@ -127,7 +129,7 @@
                     <?php } ?> 
             </div>
             <div class="card-body">
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addtask">Create Task</button>
+              <button type="button" class="btn btn-mylife" data-toggle="modal" style="background-color: <?php echo $buttoncolor; ?>"data-target="#addtask">Create Task</button>
             </div>
 
             <div id="addtask" class="modal fade" role="dialog">
@@ -195,7 +197,7 @@
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                       </select>
-                      <button class="btn btn-success" name="createtask">Create Task</button>
+                      <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" name="createtask">Create Task</button>
                     </form>
                   </div>
                 </div>
@@ -247,7 +249,7 @@
                           </div>
                           <div class="col-sm-2">
                             <form method="post" action="../php/acceptuser.php">
-                              <button name="useraccept" class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accet Request</button>
+                              <button name="useraccept" class="btn btn-mylife m-auto" type="submit" style="background-color: <?php echo $buttoncolor; ?>" value="<?php echo $mainuser; ?>">Accept Request</button>
                             </form>
                           </div>
                           <div class="col-sm-2">
@@ -283,7 +285,7 @@
                           </div>
                           <div class="col-sm-2">
                             <form method="post" action="../php/acceptuser.php">
-                              <button name="useraccept" class="btn btn-success m-auto" type="submit" value="<?php echo $mainuser; ?>">Accept Request</button>
+                              <button name="useraccept" class="btn btn-mylife m-auto" type="submit" style="background-color: <?php echo $buttoncolor; ?>" value="<?php echo $mainuser; ?>">Accept Request</button>
                             </form>
                           </div>
                           <div class="col-sm-2">
@@ -318,7 +320,7 @@
               <?php } ?>
               <form action="../php/shareschedule.php" method="post">
                 <input type="text" placeholder="User" name="shareduser" class="mb-4 form-control">
-                <button class="btn btn-success" name="shareuser">Share Schedule</button>
+                <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" name="shareuser">Share Schedule</button>
               </form>
             </div>
           </div> 
@@ -331,7 +333,7 @@
             <div class="card-body" style="overflow-y: auto;">
               <form action="../php/shareschedule.php" method="post">
                 <input type="text" placeholder="User" name="requesteduser" class="mb-4 form-control">
-                <button class="btn btn-success" name="requestuser">Request Schedule</button>
+                <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" name="requestuser">Request Schedule</button>
               </form>
             </div>
           </div> 
@@ -358,7 +360,7 @@
                   <option value="<?php echo $sharedusers ?>"><?php echo $sharedusers ?></option>
                 <?php } ?>
                 </select>
-                <button type="submit" class="btn btn-success mt-4 mb-4">Remove User</button>
+                <button type="submit" style="background-color: <?php echo $buttoncolor; ?>" class="btn btn-mylife mt-4 mb-4">Remove User</button>
               </form>
               <form method="post" action="../php/stopviewinguser.php">
                 <label>Stop Viewing Other User's Schedule</label>
@@ -376,7 +378,7 @@
                   <option value="<?php echo $sharedusers ?>"><?php echo $sharedusers ?></option>
                 <?php } ?>
                 </select>
-                <button type="submit" class="btn btn-success mt-4">Stop Viewing</button>
+                <button type="submit" style="background-color: <?php echo $buttoncolor; ?>" class="btn btn-mylife mt-4">Stop Viewing</button>
               </form>
             </div>
           </div>
@@ -396,7 +398,7 @@
               
               <form action="../php/createpurpose.php" method="post">
                 <input type="text" placeholder="Activity Name" name="purposename" class="mb-4 form-control">
-                <button class="btn btn-success mb-4" name="createpurpose">Create Activity</button>
+                <button class="btn btn-mylife mb-4" style="background-color: <?php echo $buttoncolor; ?>" name="createpurpose">Create Activity</button>
               </form>
               <form action="../php/deletepurpose.php" method="post">
                 <label>Select Activity to Delete</label>
@@ -414,7 +416,7 @@
                           <option value="<?php echo $allpurposes; ?>"><?php echo $allpurposes;?></option>
                         <?php } ?>
                 </select>
-                <button class="btn btn-success" type="submit">Delete Activity</button>
+                <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>" type="submit">Delete Activity</button>
               </form>
             </div>
           </div> 
@@ -423,7 +425,7 @@
     </div>
   </div>
 
-    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
+    <footer class="page-footer" style="height:70px; width:100%; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

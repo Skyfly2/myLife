@@ -44,6 +44,11 @@
 				if (!$result){
         			die('Error: ' . mysqli_error($link));
       			}
+      			$query = "INSERT INTO user_colors (user, maincolor, buttoncolor, taskcolor) VALUES ('$username', '#3c6948', '#6ec24f', '#3c6948') ";
+      			$result = mysqli_query($link, $query);
+      			if(!$result){
+      				die('error: ' . mysqli_error($link));
+      			}
       			//Successfully Registered
       			else{
       				header("location:../index.php?Success= You have successfully registered!");

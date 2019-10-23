@@ -4,6 +4,8 @@
 
     if(isset($_SESSION['username'])){
       $color = $_SESSION['color'];
+      $taskcolor = $_SESSION['taskcolor'];
+      $buttoncolor = $_SESSION['buttoncolor'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +72,7 @@
           <?php } ?>
             <form action="../php/updateuser.php" method="post">
               <input type="text" name="newemail" placeholder="New Email" class="form-control mb-4">
-              <button class="btn btn-success" name="updateemail">Update Email</button>
+              <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor;?>" name="updateemail">Update Email</button>
             </form>
           </div>
         </div>
@@ -91,7 +93,7 @@
           <?php } ?>
             <form action="../php/updateuser.php" method="post">
               <input type="text" name="newusername" placeholder="New Username" class="form-control mb-4">
-              <button class="btn btn-success" name="updateusername">Change Username</button>
+              <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor;?>" name="updateusername">Change Username</button>
             </form>
           </div>
         </div>
@@ -113,7 +115,7 @@
             <form action="../php/updateuser.php" method="post">
               <input type="text" name="newfirst" placeholder="New Firstname" class="form-control mb-4">
               <input type="text" name="newlast" placeholder="New Lastname" class="form-control mb-4">
-              <button class="btn btn-success" name="updatename">Change Name</button>
+              <button class="btn btn-mylife" style="background-color: <?php echo $buttoncolor;?>" name="updatename">Change Name</button>
             </form>
           </div>
         </div>
@@ -164,12 +166,23 @@
     </div>
   </div>
   <div class="col-lg-4">
-    <div class="card" style="border-color: <?php echo $color; ?>; border-width: 4px; height: 330px;">
+    <div class="card" style="border-color: <?php echo $color; ?>; border-width: 4px; height: 330px; overflow-y: auto;">
       <div class="card-header"><h2>Edit myLife Colors</h2></div>
       <div class="card-body">
         <form method="post" action="../php/editcolors.php">
+          <label for="newcolor">Change Main Colors</label>
+          <br/>
           <input type="color" name="newcolor" value="<?php echo $color ?>">
-          <button type="submit" class="btn btn-success">Change Colors</button>
+          <br/>
+          <label for="newbuttoncolor">Change Button Colors</label>
+          <br/>
+          <input type="color" name="newbuttoncolor" value="<?php echo $buttoncolor; ?>">
+          <br/>
+          <label for="newtaskcolor">Change Taskcard Colors</label>
+          <br/>
+          <input type="color" name="newtaskcolor" value="<?php echo $taskcolor ?>">
+          <br/>
+          <button type="submit" class="btn btn-mylife" style="background-color: <?php echo $buttoncolor; ?>">Update Colors</button>
         </form>
       </div>
     </div>
@@ -177,7 +190,7 @@
 </div>
   </div>
 
-    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
+    <footer class="page-footer" style="height:70px; width:100%; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>

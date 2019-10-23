@@ -5,6 +5,8 @@
     if(isset($_SESSION['username'])){
       $username = $_SESSION['username'];
       $color = $_SESSION['color'];
+      $taskcolor = $_SESSION['taskcolor'];
+      $buttoncolor = $_SESSION['buttoncolor'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +67,7 @@
     
 </div>
 
-    <footer class="page-footer" style="height:70px; background-color: <?php echo $color; ?>">
+    <footer class="page-footer" style="height:70px; width:100%; background-color: <?php echo $color; ?>">
       
         <div class="container-fluid text-center">
         <center>
