@@ -47,7 +47,7 @@
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="mydrive.php">myDrive</a>
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="messages.php">Messaging</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>
@@ -63,12 +63,22 @@
 <div class="container px-5" id="content" style="background-color: white; padding-top: 5%;">
   <div class="row">
     <div class="col-sm-12">
-      <h1>myDrive</h1>
-      <p>A place to store your files for quick and easy access</p>
+      <h1 style="font-size: 50px;">Compose Message</h1>
     </div>
+    <?php if(@$_GET['InvalidMessage']){
+      ?>
+      <div class="alert-light text-center text-danger"><?php echo $_GET['InvalidMessage']; ?></div>
+      <?php
+    }?>
     <div class="col-sm-12">
-      <form method="post">
-        <input type="file">
+      <form method="post" action="../php/sendmessage.php">
+        <label>To</label>
+        <input class="form-control mb-3" type="text" name="sendto" placeholder="Username">
+        <label>Subject</label>
+        <input class="form-control mb-3" type="text" name="subject" placeholder="Ex: Tonight's Meeting">
+        <label>Message</label>
+        <input class="form-control mb-3" type="text" name="message" placeholder="Enter your message here...">
+        <button type="submit" class="btn btn-mylife mb-3">Send</button>
       </form>
     </div>
 

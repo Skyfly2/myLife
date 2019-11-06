@@ -53,7 +53,7 @@
         <a class="nav-link" style="font-size: 25px;" href="agenda.php">Agenda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px;" href="mydrive.php">myDrive</a>
+        <a class="nav-link" style="font-size: 25px;" href="messages.php">Messaging</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" style="font-size: 25px;" href="settings.php">Settings</a>
@@ -69,7 +69,7 @@
 <div class="container px-5" id="content" style="background-color: white; padding-top: 5%; ">
     <div class="row">
       <div class="col-sm-12">
-        <h1 style="font-size: 50px;">Hello, <?php echo $_SESSION['firstname']; ?></h1>
+        <h1 style="font-size: 50px;">Hello <?php echo $_SESSION['firstname']; ?>!</h1>
         </div>
         <div class="col-sm-12">
         <h3 style="font-size: 30px;">Today is 
@@ -86,7 +86,7 @@
                                   echo $date . '-' . $year;?></h3>
         </div>
         <div class="col-lg-6 col-sm-12">
-          <div class="card mb-5" style="border-width: 4px; max-height: 580px; border-color: <?php echo $color; ?>">
+          <div class="card mb-5" style="border-width: 4px; max-height: 580px; min-height:200px;border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Daily Rundown</h2>
               </div>
@@ -145,7 +145,7 @@
           </div> 
         </div>
         <div class="col-lg-6">
-          <div class="card mb-5" style="border-width: 4px; max-height: 580px; border-color:<?php echo $color; ?>">
+          <div class="card mb-5" style="border-width: 4px; max-height: 580px; min-height: 200px; border-color:<?php echo $color; ?>">
             <div class="card-header">
               <div class="row">
                 <div class="col-sm-6">

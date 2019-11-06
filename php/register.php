@@ -51,7 +51,7 @@
       			}
       			//Successfully Registered
       			else{
-      				header("location:../index.php?Success= You have successfully registered!");
+      				header("location:../pages/loginpage.php?Success= You have successfully registered!");
       			}
 			}
 		}
