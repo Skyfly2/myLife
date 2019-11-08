@@ -93,32 +93,82 @@
                   <div class="card mb-3" style="border-color: <?php echo $color; ?>; border-width: 3px;">
                     <div class="card-header">
                       <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-5">
                           <h2><?php echo $subject; ?></h1>
                         </div>
                         <div class="col-sm-4">
-                          <h2>From: <?php echo $fromuser; ?></h2>
+                          <h2 style="float: center;">From: <?php echo $fromuser; ?></h2>
                         </div>
-                        <div class="col-sm-4">
-                          <h3>Sent: <?php  
+                        <div class="col-sm-3">
+                          <h3 style="float: right;">Sent: <?php  
                                       $ndate=substr($timesent, 5, 6); 
                                       $year=substr($timesent, 0, 4); 
                                       $date=substr($ndate, 0, 5);
                                       echo $date . '-' . $year; ?></h3>
                                     </div>
-                                </div>
+                        <div class="col-sm-12">
+                          <form method="post" action="viewmessage.php">
+                            <button style="float: right;" class="btn btn-mylife" name="message" type="submit" value="<?php echo $subject?>">View</button>
+                            <input style="display: none;" name="fromuser" value="<?php echo $fromuser; ?>">
+                            <input style="display: none;" name="timesent" value="<?php echo $timesent; ?>">
+                          </form>
+                        </div>
+                        </div>
                     </div>
                   </div>
                 <?php } ?>
         </div>
       </div>
-    <?php }?>
+    <?php }
+    ?>
       <div class="card mb-3" style="border-color: <?php echo $color; ?>; border-width: 4px;">
         <div class="card-header">
           <h2>Messages</h2>
         </div>
         <div class="card-body" style="min-height: 40px; max-height: 300px; overflow-y: auto;">
+          <?php $query3 = "SELECT fromuser, timesent, subject FROM messages WHERE user = '$username' AND viewed = 'yes'";
+                $result3 = mysqli_query($link, $query3);
+                if(!$result3){
+                  die('error: ' . mysqli_error($link));
+                }
+
+                if(mysqli_num_rows($result3) == 0){
+                  ?>
+                  <div class="alert-light text-danger text-center">You have no messages!</div>
+                <?php }
+                else{
+
+                while(list($fromuser, $timesent, $subject) = mysqli_fetch_array($result2)){ ?>
+
+                  <div class="card mb-3" style="border-color: <?php echo $color; ?>; border-width: 3px;">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col-sm-5">
+                          <h2><?php echo $subject; ?></h1>
+                        </div>
+                        <div class="col-sm-4">
+                          <h2 style="float: center;">From: <?php echo $fromuser; ?></h2>
+                        </div>
+                        <div class="col-sm-3">
+                          <h3 style="float: right;">Sent: <?php  
+                                      $ndate=substr($timesent, 5, 6); 
+                                      $year=substr($timesent, 0, 4); 
+                                      $date=substr($ndate, 0, 5);
+                                      echo $date . '-' . $year; ?></h3>
+                                    </div>
+                          <div class="col-sm-12">
+                          <form method="post" action="viewmessage.php">
+                            <button style="float: right;" class="btn btn-mylife" name="message" type="submit" value="<?php echo $subject?>">View</button>
+                            <input style="display: none;" name="fromuser" value="<?php echo $fromuser; ?>">
+                            <input style="display: none;" name="timesent" value="<?php echo $timesent; ?>">
+                          </form>
+                        </div>
+                                </div>
+                    </div>
+                  </div>
+                <?php } }?>
         </div>
+      </div>
       </div>
     </div>
     <div class="col-sm-12">
