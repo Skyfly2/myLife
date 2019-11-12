@@ -138,7 +138,7 @@
                 <?php }
                 else{
 
-                while(list($fromuser, $timesent, $subject) = mysqli_fetch_array($result2)){ ?>
+                while(list($fromuser, $timesent, $subject) = mysqli_fetch_array($result3)){ ?>
 
                   <div class="card mb-3" style="border-color: <?php echo $color; ?>; border-width: 3px;">
                     <div class="card-header">
@@ -158,9 +158,11 @@
                                     </div>
                           <div class="col-sm-12">
                           <form method="post" action="viewmessage.php">
-                            <button style="float: right;" class="btn btn-mylife" name="message" type="submit" value="<?php echo $subject?>">View</button>
+                            <button style="float: right;" class="btn btn-mylife" type="submit">View</button>
+                            <input style="display: none;" name="subject" value="<?php echo $subject; ?>">
                             <input style="display: none;" name="fromuser" value="<?php echo $fromuser; ?>">
                             <input style="display: none;" name="timesent" value="<?php echo $timesent; ?>">
+                            
                           </form>
                         </div>
                                 </div>
