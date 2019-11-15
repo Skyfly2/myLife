@@ -68,7 +68,15 @@
     <div class="col-sm-12">
       <a href="compose.php"><button style="margin-bottom: 20px;" class="btn-mylife btn">Compose</button></a>
     </div>
+    
     <div class="col-sm-12">
+          <?php 
+          //Message Deleted Successfully
+          if(@$_GET['MessageDeleted']){
+          ?>
+          <div class="alert-light text-success text-center"> <?php echo $_GET['MessageDeleted'];?></div>
+          <?php
+        } ?>
       <?php //Display unread messages if the user has them
             $query = "SELECT user FROM messages WHERE user = '$username' AND viewed = 'no'";
             $result = mysqli_query($link, $query);
@@ -156,16 +164,27 @@
                                       $date=substr($ndate, 0, 5);
                                       echo $date . '-' . $year; ?></h3>
                                     </div>
-                          <div class="col-sm-12">
-                          <form method="post" action="viewmessage.php">
-                            <button style="float: right;" class="btn btn-mylife" type="submit">View</button>
-                            <input style="display: none;" name="subject" value="<?php echo $subject; ?>">
-                            <input style="display: none;" name="fromuser" value="<?php echo $fromuser; ?>">
-                            <input style="display: none;" name="timesent" value="<?php echo $timesent; ?>">
-                            
-                          </form>
+                          
+                            <div class="col-sm-10">
+                            </div>
+                            <div class="col-sm-1">
+                              <form method="post" action="../php/deletemessage.php">
+                                <button style="float: right;" class="btn btn-danger" type="submit">Delete</button>
+                                <input style="display: none;" name="subject" value="<?php echo $subject; ?>">
+                                <input style="display: none;" name="fromuser" value="<?php echo $fromuser; ?>">
+                                <input style="display: none;" name="timesent" value="<?php echo $timesent; ?>">
+                              </form>
+                            </div>
+                            <div class="col-sm-1">
+                              <form method="post" action="viewmessage.php">
+                                <button style="float: right;" class="btn btn-mylife" type="submit">View</button>
+                                <input style="display: none;" name="subject" value="<?php echo $subject; ?>">
+                                <input style="display: none;" name="fromuser" value="<?php echo $fromuser; ?>">
+                                <input style="display: none;" name="timesent" value="<?php echo $timesent; ?>">
+                              </form>
+                          
                         </div>
-                                </div>
+                      </div>
                     </div>
                   </div>
                 <?php } }?>

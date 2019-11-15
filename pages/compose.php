@@ -59,7 +59,34 @@
     
   </div>
 </nav>
+<?php if(isset($_POST['fromuser'])){ ?>
+  <div class="container px-5" id="content" style="background-color: white; padding-top: 5%;">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 style="font-size: 50px;">Compose Message</h1>
+    </div>
+    <?php if(@$_GET['InvalidMessage']){
+      ?>
+      <div class="alert-light text-center text-danger"><?php echo $_GET['InvalidMessage']; ?></div>
+      <?php
+    }?>
+    <div class="col-sm-12">
+      <form method="post" action="../php/sendmessage.php">
+        <label>To</label>
+        <input class="form-control mb-3" type="text" name="sendto" value="<?php echo $_POST['fromuser']; ?>">
+        <label>Subject</label>
+        <input class="form-control mb-3" type="text" name="subject" value="<?php echo $_POST['subject']; ?>">
+        <label>Message</label>
+        <input class="form-control mb-3" type="text" name="message" placeholder="Enter your message here...">
+        <button type="submit" class="btn btn-mylife mb-3">Send</button>
+      </form>
+    </div>
 
+  </div>
+    
+</div>
+  ?>
+<?php } else{ ?>
 <div class="container px-5" id="content" style="background-color: white; padding-top: 5%;">
   <div class="row">
     <div class="col-sm-12">
@@ -85,6 +112,7 @@
   </div>
     
 </div>
+<?php } ?>
 
     <footer class="page-footer" style="height:70px; width:100%; background-color: <?php echo $color; ?>">
       

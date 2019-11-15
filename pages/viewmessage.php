@@ -21,12 +21,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro&display=swap" rel="stylesheet">
     <style>
+      footer{
+        bottom: 0;
+        position: absolute;
+      }
       .btn-mylife{
         background-color: <?php echo $buttoncolor;?>;
         color:white;
@@ -94,9 +97,35 @@
             $ndate=substr($timesent, 5, 6);
             $year=substr($timesent, 0, 4); 
             $date=substr($ndate, 0, 5); ?>
-      <h3>Sent: <?php echo $date . '-' . $year; ?></h3>
+      
       
       <p><?php echo $message; ?></p>
+
+      
+    </div>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-1">
+          <form method="post" action="compose.php">
+            <button class="btn btn-mylife" type="submit">Reply</button>
+            <input style="display: none;" name="fromuser" value="<?php echo $fromuser;?>">
+            <input style="display: none;" name="subject" value="<?php echo 'Re: ' . $subject;?>">
+            <input style="display: none;" name="timesent" value="<?php echo $timesent;?>">
+          </form>
+        </div>
+        <div class="col-sm-2">
+          <form method="post" action="../php/deletemessage.php">
+            <button class="btn btn-danger" type="submit">Delete Message</button> 
+            <input style="display: none;" name="fromuser" value="<?php echo $fromuser;?>">
+            <input style="display: none;" name="touser" value="<?php echo $username;?>">
+            <input style="display: none;" name="subject" value="<?php echo $subject;?>">
+            <input style="display: none;" name="timesent" value="<?php echo $timesent;?>">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <p style="font-size: 13px;">Sent: <?php echo $date . '-' . $year; ?></p>
     </div>
     
 
