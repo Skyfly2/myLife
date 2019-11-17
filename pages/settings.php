@@ -178,21 +178,32 @@
     <div class="card" style="border-color: <?php echo $color; ?>; border-width: 4px; height: 330px; overflow-y: auto;">
       <div class="card-header"><h2>Edit myLife Colors</h2></div>
       <div class="card-body">
-        <form method="post" action="../php/editcolors.php">
-          <label for="newcolor">Change Main Colors</label>
-          <br/>
-          <input type="color" name="newcolor" value="<?php echo $color ?>">
-          <br/>
-          <label for="newbuttoncolor">Change Button Colors</label>
-          <br/>
-          <input type="color" name="newbuttoncolor" value="<?php echo $buttoncolor; ?>">
-          <br/>
-          <label for="newtaskcolor">Change Taskcard Colors</label>
-          <br/>
-          <input type="color" name="newtaskcolor" value="<?php echo $taskcolor ?>">
-          <br/>
-          <button type="submit" class="btn btn-mylife">Update Colors</button>
-        </form>
+        
+          
+            <form method="post" action="../php/editcolors.php">
+              <label for="newcolor">Change Main Colors</label>
+              <br/>
+              <input type="color" name="newcolor" value="<?php echo $color ?>">
+              <br/>
+              <label for="newbuttoncolor">Change Button Colors</label>
+              <br/>
+              <input type="color" name="newbuttoncolor" value="<?php echo $buttoncolor; ?>">
+              <br/>
+              <label for="newtaskcolor">Change Taskcard Colors</label>
+              <br/>
+              <input type="color" name="newtaskcolor" value="<?php echo $taskcolor ?>">
+              <br/>
+              <div class="row">
+                <div class="col-sm-6">
+                  <button type="submit" class="btn btn-mylife">Update Colors</button>
+            </form>
+            </div>
+              <div class="col-sm-6">
+                <form method = "post" action="../php/resetcolors.php">
+                <button type="submit" class="btn btn-mylife">Reset Colors</button>
+            </form>
+              </div>
+        </div>
       </div>
     </div>
   </div>
