@@ -7,6 +7,8 @@
       $color = $_SESSION['color'];
       $taskcolor = $_SESSION['taskcolor'];
       $buttoncolor = $_SESSION['buttoncolor'];
+      set_time_limit(50000);
+      try{
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +80,7 @@
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;  max-height: 700px; overflow-y: auto;">
               <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username' ORDER BY year, month, day ASC";
+                    set_time_limit(50000);
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
@@ -91,7 +94,9 @@
                           <div class="row">
                             <div class="col-sm-10">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
-                          <?php if($day != 0 && $month != 0 && $year !=0){?>
+                          <?php 
+                          set_time_limit(50000);
+                          if($day != 0 && $month != 0 && $year !=0){?>
                           <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
                           <?php } 
                                 elseif($day != 0 && $month != 0){?>
@@ -153,7 +158,8 @@
                       <input type="text" name="description" placeholder="Task Description" class="mb-4 form-control">
                       <select name="time" class="form-control mb-4">
                         <option value=0>Hour due</option>
-                        <?php $count=1;
+                        <?php set_time_limit(50000);
+                                $count=1;
                               while($count <= 12){
                                 ?> <option value=<?php echo $count?>><?php echo $count?></option>
                                 <?php
@@ -178,7 +184,7 @@
                       </select>
                       <select name="day" class="form-control mb-4">
                         <option value=0>Day Due</option>
-                        <?php $count=1;
+                        <?php $count=1; set_time_limit(50000);
                               while($count <= 31){
                                 ?> <option value=<?php echo $count?>><?php echo $count?></option>
                                 <?php
@@ -188,7 +194,8 @@
                       </select>
                       <select name="purpose" class="mb-4 form-control">
                         <option value="none">Select Activity</option>
-                        <?php $query="SELECT purpose FROM purposes WHERE user='$username'";
+                        <?php set_time_limit(50000);
+                             $query="SELECT purpose FROM purposes WHERE user='$username'";
                               $result=mysqli_query($link, $query);
                               if(!$result){
                                 die('error: ' . mysqli_error($link));
@@ -214,8 +221,7 @@
             </div>
           </div> 
         </div>
-
-        <?php //Determine if there are any requests
+                <?php //Determine if there are any requests
               $query = "SELECT mainuser FROM shared_task_hold WHERE holduser = '$username' AND requestuser = '$username'";
               $result = mysqli_query($link, $query);
               if(!$result){
@@ -252,8 +258,9 @@
                                         die('error: ' . mysqli_error($link));
                                       }
                                       list($sharedfirst, $sharedlast) = mysqli_fetch_array($result2);
-                                      echo $sharedfirst . ' ' . $sharedlast;
+                                      echo $sharedfirst . ' ' . $sharedlast;}}
                                 ?>
+
                             <h6>Username: <?php echo $mainuser; ?></h6>
                           </div>
                           <div class="col-sm-2">
@@ -269,12 +276,7 @@
                         </div>
                           </div>
                         </div>
-                      <?php} 
-                    ?>
-              
-              
-            <?php   }} ?>
-            <?php if($numresults2 > 0){ ?>
+                        <?php if($numresults2 > 0){ ?>
               <p>These users want you to share your public schedule with them!</p>
               <?php 
                     while(list($mainuser) = mysqli_fetch_array($r1)){ ?>
@@ -305,17 +307,12 @@
                         </div>
                           </div>
                         </div>
-                      <?php} 
-                    ?>
-              
-              
-            <?php   }} ?>
-                    
-            </div>
-          </div>
-        </div>
-      <?php } ?>
-        <div class="col-sm-6">
+        
+    <?php }}} ?>
+    </div>
+    </div>
+    </div>
+<div class="col-sm-6">
           <div class="card mb-5" style="border-width: 4px; height: 260px; border-color: <?php echo $color; ?>">
             <div class="card-header">
                 <h2>Share Your Schedule</h2>
@@ -431,6 +428,7 @@
           </div> 
         </div>
 
+
     </div>
   </div>
 
@@ -453,6 +451,10 @@
 </html>
 
 <?php
+}
+catch(Exception $e){
+    echo 'Caught Exception: ', $e->getMessage(), "\n";
+}
 }
 else{
   header("location:../index.php?Invalid= You must login to access myLife");
