@@ -132,7 +132,7 @@
     </div>
     <div class="row mt-5">
       <div class="col-lg-4" style="padding-bottom: 10%;">
-      <div class="card border-danger" style="border-width: 4px; height: 330px;">
+      <div class="card border-danger" style="border-width: 4px; height: 350px;">
         <div class="card-header">
           <h4>Change Password</h4>
       </div>
@@ -152,7 +152,7 @@
     </div>
   </div>
   <div class="col-lg-4">
-      <div class="card border-danger" style="border-width: 4px; height: 330px; overflow-y: auto;">
+      <div class="card border-danger" style="border-width: 4px; height: 350px; overflow-y: auto;">
         <div class="card-header">
           <h4>Delete Account</h4>
       </div>
@@ -175,8 +175,8 @@
     </div>
   </div>
   <div class="col-lg-4">
-    <div class="card" style="border-color: <?php echo $color; ?>; border-width: 4px; height: 330px; overflow-y: auto;">
-      <div class="card-header"><h2>Edit myLife Colors</h2></div>
+    <div class="card" style="border-color: <?php echo $color; ?>; border-width: 4px; height: 350px; overflow-y: auto;">
+      <div class="card-header"><h4>Edit myLife Colors</h4></div>
       <div class="card-body">
         
           

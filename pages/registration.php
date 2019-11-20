@@ -6,6 +6,15 @@
     <title>myLife - Register</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: #3c6948;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
 
 
 </head>
@@ -36,7 +45,7 @@
                             <input type="text" name="UName" placeholder="Username" class="form-control mb-4">
                             <input type="password" name="Password" placeholder="Password" class="form-control mb-4">
                             <input type="password" name="ConfirmPassword" placeholder="Confirm Password" class="form-control mb-4">
-                            <button class="btn btn-success" name="Register">Register</button>
+                            <button class="btn btn-mylife" name="Register">Register</button>
                             <br/>
                             <a href="loginpage.php">Already have an account? Sign in here</a>
                         </form>

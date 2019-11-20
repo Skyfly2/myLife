@@ -9,10 +9,19 @@
     <title>myLife</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css"/>
     <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
+    <style>
+      .btn-mylife{
+        background-color: #3c6948;
+        color:white;
+      }
+      .btn-mylife:hover{
+        background-color: #6e706c;
+      }
+    </style>
 
 
 </head>
-<body style="background-image: url(images/landingtexture.jpg); background-size: 100%;">
+<body>
     <nav class="navbar navbar-expand-lg navbar-light" style="height: 85px; background-color:#3c6948;">
         <a class="navbar-brand" href="#" style="font-family: 'Manjari', sans-serif; font-size: 42px; color: white;">myLife</a>
     </nav>
@@ -21,19 +30,11 @@
                 <h1>Personal schedule management</h1>
                 <h1>Intelligent social collaboration</h1>
                 <h1>Seamless multi-platform use</h1>
+                <br/>
+                <a class="btn btn-mylife" style="height: 50px; width: 275px; font-size: 30px;" href="pages/loginpage.php">Login</a>
+                <br/>
+                <a class="btn btn-primary" style="height: 50px; width: 275px; font-size: 30px;" href="pages/registration.php">Register</a>
                 </center>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <img style="float: right;" src="images/mylifetransparent.png">
-                    </div>
-                    <div class="col-sm-6">
-                        <br/>
-                        <a class="btn btn-success" style="height: 50px; width: 275px; font-size: 30px;" href="pages/loginpage.php">Login</a>
-                        <br/>
-                        <a class="btn btn-primary" style="height: 50px; width: 275px; font-size: 30px;" href="pages/registration.php">Register</a>
-                    </div>
-                </div>
-            
     </div>
     
 

@@ -6,7 +6,7 @@
 		//Make user fills out all fields
 		if(empty($_POST['UName']) || empty($_POST['Password']))
 		{
-			header("location:../index.php?Invalid= Please Fill in the Required Fields");
+			header("location:../pages/loginpage.php?Invalid= Please Fill in the Required Fields");
 		}
 
 		//Assuming they use all fields, log them in
@@ -50,11 +50,11 @@
 					header("location:../pages/dashboard.php");
 				}
 				else{
-					header("location:../index.php?Invalid= Please Enter Correct Username or Password");
+					header("location:../pages/loginpage.php?Invalid= Please Enter Correct Username or Password");
 				}
 			}
 			else{
-				header("location:../index.php?Invalid= Please Enter Correct Username or Password");
+				header("location:../pages/loginpage.php?Invalid= Please Enter Correct Username or Password");
 			}
 		}
 	}

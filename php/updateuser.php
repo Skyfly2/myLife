@@ -35,16 +35,64 @@
 			$numnames = mysqli_num_rows($result1);
 
 			if($numnames == 0){
+				//Set username everywhere
 				$query2 = "UPDATE users SET UName='$newusername' WHERE UName='$username'";
 				$result2 = mysqli_query($link, $query2);
-
 				if(!$result2){
 					die('Error: ' . mysqli_error($link));
 				}
-				else{
-					$_SESSION['username'] = $newusername;
-					header("location:../pages/settings.php?SuccessUser= Username successfully updated!");
+				$query2 = "UPDATE messages SET user='$newusername' WHERE user='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
 				}
+				$query2 = "UPDATE messages SET fromuser='$newusername' WHERE fromuser='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE purposes SET user='$newusername' WHERE user='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE shared_tasks SET user='$newusername' WHERE user='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE shared_tasks SET shareduser='$newusername' WHERE shareduser='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE shared_task_hold SET mainuser='$newusername' WHERE mainuser='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE shared_task_hold SET holduser='$newusername' WHERE holduser='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE shared_task_hold SET requestuser='$newusername' WHERE requestuser='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE tasks SET user='$newusername' WHERE user='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$query2 = "UPDATE user_colors SET user='$newusername' WHERE user='$username'";
+				$result2 = mysqli_query($link, $query2);
+				if(!$result2){
+					die('Error: ' . mysqli_error($link));
+				}
+				$_SESSION['username'] = $newusername;
+				header("location:../pages/settings.php?SuccessUser= Username successfully updated!");
 			}
 			else{
 				header("location:../pages/settings.php?InvalidUser= Username already taken.");
@@ -119,15 +167,59 @@
 			header("location:../pages/settings.php?InvalidDelete= You must fill out all confirmation fields properly");
 		}
 		else{
+			//Delete Everything
 			$query = "DELETE FROM users WHERE UName = '$username'";
 			$result = mysqli_query($link, $query);
 			if(!$result){
 				die('Error: ' . mysqli_error($link));
 			}
-			else{
-				session_destroy();
-				header("location:../index.php?Success= You have successfully deleted your account. We are sorry to see you go.");
+			$query = "DELETE FROM messages WHERE user = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
 			}
+			$query = "DELETE FROM messages WHERE fromuser = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM purposes WHERE user = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM shared_tasks WHERE user = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM shared_tasks WHERE shareduser = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM shared_task_hold WHERE mainuser = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM shared_task_hold WHERE requestuser = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM tasks WHERE user = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			$query = "DELETE FROM user_colors WHERE user = '$username'";
+			$result = mysqli_query($link, $query);
+			if(!$result){
+				die('Error: ' . mysqli_error($link));
+			}
+			session_destroy();
+			header("location:../index.php?Success= You have successfully deleted your account. We are sorry to see you go.");
 		}
 	}
 	else{

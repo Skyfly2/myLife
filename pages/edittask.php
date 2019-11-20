@@ -47,7 +47,7 @@
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="agenda.php">Agenda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="mydrive.php">myDrive</a>
+        <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="messages.php">Messaging</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" style="font-size: 25px; font-family: 'Manjari', sans-serif;" href="settings.php">Settings</a>

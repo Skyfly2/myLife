@@ -66,7 +66,7 @@
       <h1 style="font-size: 50px;">Messages</h1>
     </div>
     <div class="col-sm-12">
-      <a href="compose.php"><button style="margin-bottom: 20px;" class="btn-mylife btn">Compose</button></a>
+      <a href="compose.php"><button style="margin-bottom: 20px; font-family: 'Source Sans Pro', sans-serif;" class="btn-mylife btn">Compose</button></a>
     </div>
     
     <div class="col-sm-12">
