@@ -1,6 +1,14 @@
 <?php
 	session_start();
 	require('config.php');
+	function safeInput($value){
+		str_replace('"', '', $value);
+		str_replace('\'', '', $value);
+		str_replace(' ', '', $value);
+		str_replace(';', '', $value);
+		str_replace('/', '', $value);
+		return $value;
+	}
 	if(isset($_POST['Login']))
 	{
 		//Make user fills out all fields
@@ -12,7 +20,8 @@
 		//Assuming they use all fields, log them in
 		else
 		{
-			$username = $_POST['UName'];
+			$username = safeInput($_POST['UName']);
+
 			
 			$query = "SELECT UName FROM users WHERE UName='$username'";
 			$result = mysqli_query($link,$query);
@@ -30,7 +39,7 @@
 					die('Error2: ' . mysqli_error($link));
 				}
 				list($first, $last, $userval, $passval, $email) = mysqli_fetch_array($result2);
-				$password = $_POST['Password'];
+				$password = safeInput($_POST['Password']);
 				if(password_verify($password, $passval)){
 					$_SESSION['username'] = $userval;
 					$user = $_SESSION['username'];

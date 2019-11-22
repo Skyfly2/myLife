@@ -1,10 +1,18 @@
 <?php
 	session_start();
 	require_once('config.php');
+		function safeInput($value){
+		str_replace('"', '', $value);
+		str_replace('\'', '', $value);
+		str_replace(' ', '', $value);
+		str_replace(';', '', $value);
+		str_replace('/', '', $value);
+		return $value;
+	}
 	if(isset($_POST['Register']))
 	{
 		//Catch if user doesn't fill out all data fields
-		if(empty($_POST['UName']) || empty($_POST['Password']) || empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['email']) || empty($_POST['ConfirmPassword']))
+		if(empty(safeInput($_POST['UName'])) || empty(safeInput($_POST['Password'])) || empty(safeInput($_POST['firstname'])) || empty(safeInput($_POST['lastname'])) || empty(safeInput($_POST['email'])) || empty(safeInput($_POST['ConfirmPassword'])))
 		{
 			header("location:../pages/registration.php?Invalid= Please Fill in the Required Fields");
 		}
@@ -12,9 +20,9 @@
 		//Assuming all fields are filled out
 		else
 		{
-			$username = $_POST['UName'];
-			$password = $_POST['Password'];
-			$confirmpass = $_POST['ConfirmPassword'];
+			$username = safeInput($_POST['UName']);
+			$password = safeInput($_POST['Password']);
+			$confirmpass = safeInput($_POST['ConfirmPassword']);
 
 			//Confirm Username does not already exist
 			$q = "SELECT UName FROM users WHERE UName = '$username'";
@@ -32,9 +40,9 @@
 				header("location:../pages/registration.php?Invalid= Passwords did not match");
 			}
 			else{
-			$firstname = $_POST['firstname'];
-			$lastname = $_POST['lastname'];
-			$email = $_POST['email'];
+			$firstname = safeInput($_POST['firstname']);
+			$lastname = safeInput($_POST['lastname']);
+			$email = safeInput($_POST['email']);
 			
 			
 			$password = password_hash($password, PASSWORD_DEFAULT);

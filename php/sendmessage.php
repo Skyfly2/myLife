@@ -1,13 +1,18 @@
 <?php
+
+    function safe($val){
+        str_replace('\'', '', $val);
+        return val;
+    }
 	session_start();
 	require('config.php');
 	$username = $_SESSION['username'];
 	
 	if(isset($_POST['sendto'])){
 		if(isset($_POST['message'])){
-			$sendto = $_POST['sendto'];
-			$message = $_POST['message'];
-			$subject = $_POST['subject'];
+			$sendto = safe($_POST['sendto']);
+			$message = safe($_POST['message']);
+			$subject = safe($_POST['subject']);
 			//Make sure user exists
 			$query = "SELECT UName FROM users WHERE UName = '$sendto'";
 			$result = mysqli_query($link, $query);

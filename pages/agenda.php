@@ -80,13 +80,14 @@
               </div>
             <div class="card-body" style="border-bottom: 1px solid grey;  max-height: 700px; overflow-y: auto;">
               <?php $query="SELECT taskname, purpose, description, user, public, day, month, year, hour FROM tasks WHERE user='$username' ORDER BY year, month, day ASC";
-                    set_time_limit(50000);
+                  
                     $result = mysqli_query($link, $query);
                     if(!$result){
                       die('error: ' . mysqli_error($link));
                     }
                     $numtasks=mysqli_num_rows($result);
                     if($numtasks > 0){
+                      //Gather the tasks
                       while(list($taskname, $purpose, $description, $user, $public, $day, $month, $year, $hour)=mysqli_fetch_array($result)){
                       ?>
                       <div class="card mb-5">
@@ -95,7 +96,7 @@
                             <div class="col-sm-10">
                           <h5 style="color: white;"><?php echo $taskname; ?></h5>
                           <?php 
-                          set_time_limit(50000);
+                          //Make it look kind of nice
                           if($day != 0 && $month != 0 && $year !=0){?>
                           <p style="color: white;"><?php echo 'Due: ' . $month . '/' . $day . '/' . $year; ?></p>
                           <?php } 
@@ -258,8 +259,8 @@
                                         die('error: ' . mysqli_error($link));
                                       }
                                       list($sharedfirst, $sharedlast) = mysqli_fetch_array($result2);
-                                      echo $sharedfirst . ' ' . $sharedlast;}}
-                                ?>
+                                      echo $sharedfirst . ' ' . $sharedlast;
+                                ?></h2>
 
                             <h6>Username: <?php echo $mainuser; ?></h6>
                           </div>
@@ -276,7 +277,10 @@
                         </div>
                           </div>
                         </div>
-                        <?php if($numresults2 > 0){ ?>
+                        
+
+                        
+                       <?php }}if($numresults2 > 0){ ?>
               <p>These users want you to share your public schedule with them!</p>
               <?php 
                     while(list($mainuser) = mysqli_fetch_array($r1)){ ?>
@@ -291,7 +295,7 @@
                                       }
                                       list($sharedfirst, $sharedlast) = mysqli_fetch_array($result2);
                                       echo $sharedfirst . ' ' . $sharedlast;
-                                ?>
+                                ?></h2>
                             <h6>Username: <?php echo $mainuser; ?></h6>
                           </div>
                           <div class="col-sm-2">
@@ -307,11 +311,19 @@
                         </div>
                           </div>
                         </div>
+                      
+                  
         
-    <?php }}} ?>
-    </div>
-    </div>
-    </div>
+    <?php }} ?> </div>
+  </div>
+</div> <?php }  ?>
+    
+
+    
+    
+  
+    
+    
 <div class="col-sm-6">
           <div class="card mb-5" style="border-width: 4px; height: 260px; border-color: <?php echo $color; ?>">
             <div class="card-header">
